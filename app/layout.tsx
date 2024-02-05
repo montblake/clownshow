@@ -3,8 +3,8 @@ import { sansSerif, serif } from '@/app/fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Moby-Dick on Tour',
-  description: 'A project app developed by Blake Montgomery',
+  title: 'clownshow',
+  description: 'creation and performance',
 };
 
 export default function RootLayout({
