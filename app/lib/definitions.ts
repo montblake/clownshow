@@ -3,8 +3,18 @@ export type Performance = {
   time: string;
 };
 
+export type Show = {
+  id: string;
+  show_title: string;
+  user_id: string;
+  running_time_in_minutes: number;
+  num_intermissions: number;
+  cast_size: number;
+}
+
 export type Booking = {
   id: string;
+  show_id: string;
   presenter_id: string;
   performances: Performance[];
   fee: number;
