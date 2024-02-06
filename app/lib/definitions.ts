@@ -1,7 +1,15 @@
 export type Performance = {
-  date: string;
-  time: string;
+  id: string;
+  booking_id: string;
+  show_id: string;
+  date_time: string;
 };
+
+export type TourField = {
+  presenter_name: string;
+  presenter_location: string;
+  performances: Date[];
+}
 
 export type Show = {
   id: string;

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -7,6 +7,7 @@ export default function Home() {
       <h1 className="text-5xl text-slate-800">
         clownshow
       </h1>
+      <Link href={"/dashboard"} className="text-slate-500">dashboard</Link>
     </main>
   );
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { sansSerif, serif } from '@/app/fonts';
-import './globals.css';
+import { sansSerif, serif } from '@/app/ui/fonts';
+import '@/app/ui/globals.css';
 
 export const metadata: Metadata = {
   title: 'clownshow',
@@ -13,8 +13,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={serif.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body className={sansSerif.className}>
+        {children}
+        </body>
     </html>
   );
 }

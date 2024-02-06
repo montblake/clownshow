@@ -4,9 +4,14 @@ import Link from 'next/link';
 
 export default async function Page() {
   const presenters = await fetchPresenters();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-24">
+      <header className="flex flex-col items-center mb-8">
+
       <h2 className="text-3xl mb-4">Presenters</h2>
+      <button className="bg-slate-500 p-4 rounded-lg hover:bg-slate-400 active:underline">Add Presenter</button>
+      </header>
       <ul className="flex flex-col gap-2 justify-center items-center">
         {presenters?.map(p => (
           <Link key={p.id} href={`/management/presenters/${p.id}`} className="w-full">
@@ -16,6 +21,9 @@ export default async function Page() {
             </h3>
             <p>
               {p.location}
+            </p>
+            <p>
+              Contact: {p.contact}
             </p>
           </li>
           </Link>
