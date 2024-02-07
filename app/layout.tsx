@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { sansSerif, serif } from '@/app/ui/fonts';
-import '@/app/ui/globals.css';
+import { sansSerif } from '@/styles/fonts';
+import '@/styles/globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: 'clownshow',
@@ -16,8 +17,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={sansSerif.className}>
-        {children}
-        </body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

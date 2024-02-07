@@ -1,3 +1,5 @@
+// app/lib/definitions.ts
+
 export type Performance = {
   id: string;
   booking_id: string;

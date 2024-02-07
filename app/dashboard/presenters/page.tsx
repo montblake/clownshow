@@ -1,5 +1,5 @@
 
-import { fetchPresenters } from '@/app/lib/data';
+import { fetchPresenters } from '@/lib/data';
 import Link from 'next/link';
 
 export default async function Page() {
