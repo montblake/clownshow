@@ -9,6 +9,7 @@ import {
   Presenter,
   User,
   TourField,
+  BookingsField,
 } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
@@ -69,18 +70,6 @@ export const fetchFilteredPresenters = async (
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch filtered presenters');
-  }
-};
-
-export const fetchBookings = async () => {
-  noStore();
-  try {
-    const data = await sql<Booking>`SELECT * FROM clownshow_bookings`;
-    console.log('Bookings', data.rows);
-    return data.rows;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed ot fetch bookings data.');
   }
 };
 
@@ -173,5 +162,66 @@ export const fetchUnbookedPresenters = async () => {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch unbooked presenters.');
+  }
+};
+
+// export const fetchAllBookings = async () => {
+//   noStore();
+//   try {
+//     const data = await sql<BookingsField>`
+//       SELECT
+//         cpr.name AS presenter_name,
+//         cpr.location AS presenter_location,
+//         cpr.contact AS presenter_contact,
+//         array_agg(cp.date_time ORDER BY cp.date_time) AS performances,
+//         cs.show_title AS show_title,
+//         cb.fee,
+//         cb.payment_status
+//       FROM clownshow_bookings cb
+//       JOIN clownshow_performances cp ON cp.booking_id = cb.id
+//       JOIN clownshow_shows cs ON cp.show_id = cs.id
+//       JOIN clownshow_presenters cpr ON cb.presenter_id = cpr.id
+//       GROUP BY cpr.name, cpr.location, cpr.contact, cs.show_title, cb.fee, cb.payment_status
+//     `;
+//     const allBookings = data.rows;
+//     return allBookings;
+//   } catch (error) {
+//     console.error('Database Error:', error);
+//     throw new Error('Failed to fetch bookings data.');
+//   }
+// };
+
+
+
+export const fetchFilteredBookings = async (query: string) => {
+  noStore();
+  try {
+    const data = await sql<BookingsField>`
+      SELECT
+        cpr.name AS presenter_name,
+        cpr.location AS presenter_location,
+        cpr.contact AS presenter_contact,
+        array_agg(cp.date_time ORDER BY cp.date_time) AS performances,
+        cs.show_title AS show_title,
+        cb.fee,
+        cb.payment_status
+      FROM clownshow_bookings cb
+      JOIN clownshow_performances cp ON cp.booking_id = cb.id
+      JOIN clownshow_shows cs ON cp.show_id = cs.id
+      JOIN clownshow_presenters cpr ON cb.presenter_id = cpr.id
+      WHERE
+        cpr.name ILIKE ${`%${query}%`} OR
+        cpr.location ILIKE ${`%${query}%`
+   } OR
+        cpr.contact ILIKE ${`%${query}%`} OR
+        cb.payment_status ILIKE ${`%${query}%`}
+      GROUP BY cpr.name, cpr.location, cpr.contact, cs.show_title, cb.fee, cb.payment_status
+      ORDER BY performances
+    `;
+    const filteredBookings = data.rows;
+    return filteredBookings;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch bookings data.');
   }
 };

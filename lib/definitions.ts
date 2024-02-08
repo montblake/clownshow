@@ -44,3 +44,14 @@ export type User = {
   email: string;
   password: string;
 };
+
+export type BookingsField = {
+  id: string;
+  fee: number;
+  payment_status: 'pending' | 'paid';
+  presenter_name: string;
+  presenter_location: string;
+  presenter_contact: string;
+  show_title: string;
+  performances: Date[];
+};
