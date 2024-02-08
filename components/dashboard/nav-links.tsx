@@ -22,7 +22,7 @@ const links = [
 export default function NavLinks() {
   const pathname = usePathname();
   return (
-    <>
+    <div className="flex grow justify-start gap-2 lg:flex-col">
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
@@ -30,15 +30,15 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-background p-3 text-sm font-medium hover:bg-red-100 hover:text-red-600 md:flex-none md:justify-start md:p-2 md:px-3',
-              { 'bg-red-100 text-red-600': pathname === link.href },
+              'flex h-[48px] grow items-center justify-center gap-2 rounded-xl bg-background p-3 text-sm font-medium drop-shadow hover:bg-brand-light hover:text-brand lg:flex-none lg:justify-start lg:p-2 lg:px-3',
+              { 'bg-brand-light text-brand-dark': pathname === link.href },
             )}
           >
             <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
+            <p className="hidden sm:block">{link.name}</p>
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }

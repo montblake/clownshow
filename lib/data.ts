@@ -1,9 +1,15 @@
-// app/lib/data.ts
+// lib/data.ts
 
-"use server"
+'use server';
 
 import { sql } from '@vercel/postgres';
-import { Performance, Booking, Presenter, User, TourField } from './definitions';
+import {
+  Performance,
+  Booking,
+  Presenter,
+  User,
+  TourField,
+} from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
 export const fetchPresenters = async () => {
@@ -16,19 +22,19 @@ export const fetchPresenters = async () => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export const fetchBookings = async () => {
   noStore();
   try {
     const data = await sql<Booking>`SELECT * FROM clownshow_bookings`;
-    console.log("Bookings", data.rows);
+    console.log('Bookings', data.rows);
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed ot fetch bookings data.');
   }
-}
+};
 
 export const fetchCardData = async () => {
   noStore();
@@ -51,17 +57,19 @@ export const fetchCardData = async () => {
     const bookingsIncomePending = Number(data[1].rows[0].pending ?? '0');
     const bookingsIncomeTotal = bookingsIncomeReceived + bookingsIncomePending;
 
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     return {
       numberOfBookings,
       bookingsIncomeReceived,
       bookingsIncomePending,
       bookingsIncomeTotal,
-    }
+    };
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch card data.');
   }
-}
+};
 
 export const fetchAggBookings = async () => {
   noStore();
@@ -80,13 +88,15 @@ export const fetchAggBookings = async () => {
       ORDER BY performances   
     `;
     const mobyBookings = data.rows;
-    console.log("Bookings", mobyBookings);
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     return mobyBookings;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch Moby Dick bookings data.');
   }
-}
+};
 
 export const fetchUnbookedPresenters = async () => {
   noStore();
@@ -108,9 +118,12 @@ export const fetchUnbookedPresenters = async () => {
       ORDER BY cpr.name
     `;
     const presenters: Presenter[] = data.rows;
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     return presenters;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch unbooked presenters.');
   }
-}
+};

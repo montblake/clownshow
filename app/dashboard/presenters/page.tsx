@@ -1,35 +1,28 @@
-
+import { PlusIcon } from '@heroicons/react/24/outline';
 import { fetchPresenters } from '@/lib/data';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default async function Page() {
   const presenters = await fetchPresenters();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start p-24">
-      <header className="flex flex-col items-center mb-8">
-
-      <h2 className="text-3xl mb-4">Presenters</h2>
-      <button className="bg-slate-500 p-4 rounded-lg hover:bg-slate-400 active:underline">Add Presenter</button>
+    <main className="w-full">
+      <header className="mb-4 flex w-full items-center justify-between">
+        <h2 className="text-xl md:text-2xl">Presenters</h2>
+        <Button variant="outline" size="icon">
+          <PlusIcon className="w-6" />
+        </Button>
       </header>
-      <ul className="flex flex-col gap-2 justify-center items-center">
-        {presenters?.map(p => (
-          <Link key={p.id} href={`/management/presenters/${p.id}`} className="w-full">
-          <li className="bg-slate-50 p-4 rounded-lg text-xl text-slate-800 flex flex-col justify-center items-center">
-            <h3 className="font-bold text-2xl">          
-              {p.name}
-            </h3>
-            <p>
-              {p.location}
-            </p>
-            <p>
-              Contact: {p.contact}
-            </p>
+      <ul className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        {presenters?.map((p) => (
+          <li key={p.id} className="flex flex-col items-center justify-center rounded-lg bg-slate-50 p-4 text-xl text-slate-800 drop-shadow">
+            <h3 className="text-2xl font-bold">{p.name}</h3>
+            <p>{p.location}</p>
+            <p>Contact: {p.contact}</p>
           </li>
-          </Link>
         ))}
       </ul>
-
     </main>
   );
 }

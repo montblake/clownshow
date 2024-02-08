@@ -1,9 +1,9 @@
 // app/lib/utils.ts
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export const formatCurrency = (amount: number) => {
@@ -13,16 +13,19 @@ export const formatCurrency = (amount: number) => {
   });
 };
 
-export const formatDateToLocal = (
-  dateStr: string,
-  locale: string = 'en-US',
-) => {
-  const date = new Date(dateStr);
-  const options: Intl.DateTimeFormatOptions = {
+export const formatDateTime = (dateStr: string) => {
+  const locale = 'en-US';
+  const datetime = new Date(dateStr);
+  const dateOptions: Intl.DateTimeFormatOptions = {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
   };
-  const formatter = new Intl.DateTimeFormat(locale, options);
-  return formatter.format(date);
+  const dateFormatter = new Intl.DateTimeFormat(locale, dateOptions);
+  const timeOptions: Intl.DateTimeFormatOptions = {
+    timeStyle: 'short',
+    hour12: true,
+  };
+  const timeFormatter = new Intl.DateTimeFormat(locale, timeOptions);
+  return `${dateFormatter.format(datetime)} at ${timeFormatter.format(datetime)}`;
 };

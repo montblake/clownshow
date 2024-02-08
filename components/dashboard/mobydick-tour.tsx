@@ -1,46 +1,48 @@
-import { serif } from '@/styles/fonts';
+// components/dashboard/mobydick-tour.tsx
 
-export default async function MobyDickTour({
-  performances,
-}: {
-  performances: {
-    presenter_name: string,
-    presenter_location: string,
-    performances: Date[],
-  }[];
-}) {
+import { serif } from '@/styles/fonts';
+import { CalendarDaysIcon } from '@heroicons/react/24/outline';
+import { formatDateTime } from '@/lib/utils';
+import { fetchAggBookings } from '@/lib/data';
+
+export default async function MobyDickTour() {
+  const performances = await fetchAggBookings();
 
   if (!performances || performances.length === 0) {
-    return <p className="mt-4 text-gray-400">No data available.</p>;
+    return <p className="mt-4 text-muted-foreground">No data available.</p>;
   }
 
   return (
-    <div className="w-full md:col-span-4 bg-slate-200 rounded-lg flex flex-col justify-start items-center px-8 py-4 shadow-sm">
-      <h2 className={`${serif.className} mb-4 text-xl lg:text-2xl`}>
-        Moby Dick Tour
-      </h2>
-      <ul className="w-full">
-        {
-          performances.map(p => (
-            <li key={p.presenter_name} className="mb-4 bg-white px-4 py-2 flex flex-col justify-start items-center border rounded-lg w-full">
-              <div className="mb-2 flex flex-col items-center w-full">
+    <div className="w-full rounded-xl bg-muted bg-muted p-2 shadow-sm md:col-span-4">
+      <div className="flex p-4">
+        <CalendarDaysIcon className="h-5 w-5 text-foreground" />
+        <h2 className="ml-2 text-sm font-medium text-foreground">
+          Moby Dick Tour
+        </h2>
+      </div>
 
-              <p className="font-bold text-2xl">{p.presenter_name}</p>
+      <ul>
+        {performances.map((p) => (
+          <li
+            key={p.presenter_name}
+            className="mb-4 flex w-full flex-col items-center justify-start rounded-lg border bg-background p-4"
+          >
+            <div className="mb-2 flex w-full flex-col items-center">
+              <h3 className="truncate text-xl font-bold">{p.presenter_name}</h3>
               <p className="italic">{p.presenter_location}</p>
-              </div>
-              <ul className="flex flex-col items-center mb-4 w-full">
-                {p.performances.map(perf => (
-                  <li key={perf.toLocaleString()} className={`${serif.className} text-xl`}>
-                    {perf.toLocaleString()}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))
-        }
-        
-  
-       
+            </div>
+            <ul className="mb-4 flex w-full flex-col items-center">
+              {p.performances.map((perf) => (
+                <li
+                  key={perf.toLocaleString()}
+                  className={`${serif.className} text-md`}
+                >
+                  {formatDateTime(perf.toLocaleString())}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
       </ul>
     </div>
   );
