@@ -1,12 +1,12 @@
-import { formatDateTime} from '@/lib/utils';
+import { formatDateTime } from '@/lib/utils';
 import { fetchFilteredBookings } from '@/lib/data';
 
 export default async function BookingsList({
   query,
   currentPage,
 }: {
-    query: string;
-    currentPage: number;
+  query: string;
+  currentPage: number;
 }) {
   const bookings = await fetchFilteredBookings(query, currentPage);
 
@@ -25,14 +25,12 @@ export default async function BookingsList({
           <p>Fee: {b.fee}</p>
           <p>Status: {b.payment_status}</p>
           <ul className="mb-4 flex w-full flex-col items-center">
-              {b.performances.map((perf: Date) => (
-                <li
-                  key={perf.toLocaleString()}
-                >
-                  {formatDateTime(perf.toLocaleString())}
-                </li>
-              ))}
-            </ul>
+            {b.performances.map((perf: Date) => (
+              <li key={perf.toLocaleString()}>
+                {formatDateTime(perf.toLocaleString())}
+              </li>
+            ))}
+          </ul>
         </li>
       ))}
     </ul>

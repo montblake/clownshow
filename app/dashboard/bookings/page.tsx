@@ -6,14 +6,14 @@ import { CreateBooking } from '@/components/bookings/buttons';
 import { Suspense } from 'react';
 import { BookingsListSkeleton } from '@/components/skeletons';
 
-export default async function Page({ 
+export default async function Page({
   searchParams,
- }: {
+}: {
   searchParams?: {
     query?: string;
     page?: string;
   };
- }) {
+}) {
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 
@@ -27,7 +27,7 @@ export default async function Page({
         {/* <CreateBooking /> */}
       </div>
       <Suspense key={query + currentPage} fallback={BookingsListSkeleton}>
-        <BookingsList query={query} currentPage={currentPage}/>
+        <BookingsList query={query} currentPage={currentPage} />
       </Suspense>
       {/* <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} />

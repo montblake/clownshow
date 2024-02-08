@@ -121,9 +121,6 @@ export const PresentersListSkeleton = (
   </ul>
 );
 
-
-
-
 export const BookingsListSkeleton = (
   <ul className="flex flex-col items-center gap-4">
     <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">

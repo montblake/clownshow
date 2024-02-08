@@ -191,8 +191,6 @@ export const fetchUnbookedPresenters = async () => {
 //   }
 // };
 
-
-
 export const fetchFilteredBookings = async (query: string) => {
   noStore();
   try {
@@ -211,8 +209,7 @@ export const fetchFilteredBookings = async (query: string) => {
       JOIN clownshow_presenters cpr ON cb.presenter_id = cpr.id
       WHERE
         cpr.name ILIKE ${`%${query}%`} OR
-        cpr.location ILIKE ${`%${query}%`
-   } OR
+        cpr.location ILIKE ${`%${query}%`} OR
         cpr.contact ILIKE ${`%${query}%`} OR
         cb.payment_status ILIKE ${`%${query}%`}
       GROUP BY cpr.name, cpr.location, cpr.contact, cs.show_title, cb.fee, cb.payment_status
