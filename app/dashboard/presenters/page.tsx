@@ -1,28 +1,41 @@
-import { PlusIcon } from '@heroicons/react/24/outline';
-import { fetchPresenters } from '@/lib/data';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+// app/dashboard/presenters/page.tsx
 
-export default async function Page() {
-  const presenters = await fetchPresenters();
+import Pagination from '@/components/presenters/pagination';
+import Search from '@/components/presenters/search';
+import { CreatePresenter } from '@/components/presenters/buttons';
+import PresentersList from '@/components/presenters/presenters-list';
+import { Suspense } from 'react';
+import { PresentersListSkeleton } from '@/components/skeletons';
+import { fetchPresentersPages } from '@/lib/data';
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const totalPages = await fetchPresentersPages(query);
 
   return (
     <main className="w-full">
       <header className="mb-4 flex w-full items-center justify-between">
         <h2 className="text-xl md:text-2xl">Presenters</h2>
-        <Button variant="outline" size="icon">
-          <PlusIcon className="w-6" />
-        </Button>
       </header>
-      <ul className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        {presenters?.map((p) => (
-          <li key={p.id} className="flex flex-col items-center justify-center rounded-lg bg-slate-50 p-4 text-xl text-slate-800 drop-shadow">
-            <h3 className="text-2xl font-bold">{p.name}</h3>
-            <p>{p.location}</p>
-            <p>Contact: {p.contact}</p>
-          </li>
-        ))}
-      </ul>
+      <div className="my-4 flex items-center justify-between gap-2 md:my-8">
+        <Search placeholder="Filter by..." />
+        <CreatePresenter />
+      </div>
+      <Suspense fallback={PresentersListSkeleton}>
+        <PresentersList query={query} currentPage={currentPage} />
+      </Suspense>
+      <div className="mt-5 flex w-full justify-center">
+        <Pagination totalPages={totalPages} />
+      </div>
     </main>
   );
 }

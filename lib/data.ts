@@ -12,18 +12,66 @@ import {
 } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
-export const fetchPresenters = async () => {
-  noStore();
+// export const fetchPresenters = async () => {
+//   noStore();
+//   try {
+//     const presenters = await sql<Presenter>`
+//     SELECT * FROM clownshow_presenters
+//     `;
+//     return presenters.rows;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+const ITEMS_PER_PAGE = 12;
+export const fetchPresentersPages = async (query: string) => {
   try {
-    const presenters = await sql<Presenter>`
-    SELECT * FROM clownshow_presenters
+    const count = await sql`
+      SELECT COUNT(*)
+        FROM clownshow_presenters cpr
+      WHERE
+        cpr.name ILIKE ${`%${query}%`} OR
+        cpr.location ILIKE ${`%${query}%`} OR
+        cpr.contact ILIKE ${`%${query}%`}
     `;
-    return presenters.rows;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
   } catch (error) {
-    console.error(error);
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of presenters.');
   }
 };
 
+export const fetchFilteredPresenters =  async (
+  query: string,
+  currentPage: number,
+) => {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const presenters = await sql<Presenter>`
+      SELECT
+        cpr.id,
+        cpr.name,
+        cpr.location,
+        cpr.contact
+      FROM clownshow_presenters cpr
+      WHERE
+        cpr.name ILIKE ${`%${query}%`} OR
+        cpr.location ILIKE ${`%${query}%`} OR
+        cpr.contact ILIKE ${`%${query}%`}
+      ORDER BY cpr.name DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+    return presenters.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch filtered presenters');
+  }
+}
+  
 export const fetchBookings = async () => {
   noStore();
   try {
