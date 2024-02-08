@@ -44,7 +44,7 @@ export const fetchPresentersPages = async (query: string) => {
   }
 };
 
-export const fetchFilteredPresenters =  async (
+export const fetchFilteredPresenters = async (
   query: string,
   currentPage: number,
 ) => {
@@ -70,8 +70,8 @@ export const fetchFilteredPresenters =  async (
     console.error('Database Error:', error);
     throw new Error('Failed to fetch filtered presenters');
   }
-}
-  
+};
+
 export const fetchBookings = async () => {
   noStore();
   try {

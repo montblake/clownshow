@@ -6,5 +6,5 @@ export function CreatePresenter() {
     <Button variant="outline" size="icon">
       <PlusIcon className="w-6" />
     </Button>
-  );  
+  );
 }

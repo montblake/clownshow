@@ -53,72 +53,72 @@ export const UnbookedPresentersSkeleton = (
 );
 
 export const PresentersListSkeleton = (
-    <ul className="flex flex-col items-center gap-4">
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-      <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-5 w-1/2" />
-      </li>
-    </ul>
+  <ul className="flex flex-col items-center gap-4">
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+    <li className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
+      <Skeleton className="h-5 w-3/4" />
+      <Skeleton className="h-5 w-1/2" />
+    </li>
+  </ul>
 );
 
 export const MobyTourSkeleton = (
