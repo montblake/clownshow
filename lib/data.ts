@@ -191,8 +191,14 @@ export const fetchUnbookedPresenters = async () => {
 //   }
 // };
 
-export const fetchFilteredBookings = async (query: string) => {
+const BOOKINGS_PER_PAGE = 6;
+export const fetchFilteredBookings = async (
+  query: string,
+  currentPage: number,
+) => {
   noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
   try {
     const data = await sql<BookingsField>`
       SELECT
@@ -214,6 +220,7 @@ export const fetchFilteredBookings = async (query: string) => {
         cb.payment_status ILIKE ${`%${query}%`}
       GROUP BY cpr.name, cpr.location, cpr.contact, cs.show_title, cb.fee, cb.payment_status
       ORDER BY performances
+      LIMIT ${BOOKINGS_PER_PAGE} OFFSET ${offset}
     `;
     const filteredBookings = data.rows;
     return filteredBookings;
