@@ -14,7 +14,7 @@ const FormSchema = z.object({
   contact: z.string(),
 });
 
-const CreatePresenter = FormSchema.omit({ id: true })
+const CreatePresenter = FormSchema.omit({ id: true });
 
 export async function createPresenter(formData: FormData) {
   const { name, location, contact } = CreatePresenter.parse({
@@ -30,7 +30,7 @@ export async function createPresenter(formData: FormData) {
 
   revalidatePath('/dashboard/presenters');
   redirect('/dashboard/presenters');
-};
+}
 
 export async function createBooking(formData: FormData) {
   // TODO

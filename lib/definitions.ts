@@ -35,7 +35,14 @@ export type Presenter = {
   id: string;
   name: string;
   location: string;
-  contact: string;
+  contact_id: string;
+};
+
+export type Contact = {
+  id: string;
+  name: string;
+  phone: string;
+  email: string;
 };
 
 export type User = {

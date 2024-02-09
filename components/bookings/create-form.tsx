@@ -28,7 +28,7 @@ export default function Form() {
             Presenter Location
           </label>
           <div className="relative mt-2 rounded-md">
-          <input
+            <input
               id="location"
               name="location"
               type="text"
@@ -52,7 +52,7 @@ export default function Form() {
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
             />
           </div>
-        </div> 
+        </div>
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link

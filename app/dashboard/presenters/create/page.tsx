@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/breadcrumbs';
 
 export default function Page() {
   // const customers = await fetchCustomers();
- 
+
   return (
     <main>
       <Breadcrumbs
