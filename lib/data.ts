@@ -3,14 +3,8 @@
 'use server';
 
 import { sql } from '@vercel/postgres';
-import {
-  Presenter,
-  User,
-  TourField,
-  BookingsField,
-} from './definitions';
+import { Presenter, User, TourField, BookingsField } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
-
 
 const PRESENTERS_PER_PAGE = 12;
 export const fetchPresentersPages = async (query: string) => {
@@ -24,7 +18,9 @@ export const fetchPresentersPages = async (query: string) => {
         cpr.contact ILIKE ${`%${query}%`}
     `;
 
-    const totalPages = Math.ceil(Number(count.rows[0].count) / PRESENTERS_PER_PAGE);
+    const totalPages = Math.ceil(
+      Number(count.rows[0].count) / PRESENTERS_PER_PAGE,
+    );
     return totalPages;
   } catch (error) {
     console.error('Database Error:', error);
@@ -152,7 +148,6 @@ export const fetchUnbookedPresenters = async () => {
   }
 };
 
-
 const BOOKINGS_PER_PAGE = 6;
 export const fetchFilteredBookings = async (
   query: string,
@@ -208,7 +203,9 @@ export const fetchBookingsPages = async (query: string) => {
         cs.show_title ILIKE ${`%${query}%`} OR
         cb.payment_status ILIKE ${`%${query}%`}
     `;
-    const totalPages = Math.ceil(Number(count.rows[0].total_bookings) / BOOKINGS_PER_PAGE);
+    const totalPages = Math.ceil(
+      Number(count.rows[0].total_bookings) / BOOKINGS_PER_PAGE,
+    );
     return totalPages;
   } catch (error) {
     console.error('Database Error:', error);
