@@ -46,7 +46,7 @@ export const fetchFilteredPresenters = async (
         cpr.name ILIKE ${`%${query}%`} OR
         cpr.location ILIKE ${`%${query}%`} OR
         cpr.contact ILIKE ${`%${query}%`}
-      ORDER BY cpr.name DESC
+      ORDER BY cpr.name
       LIMIT ${PRESENTERS_PER_PAGE} OFFSET ${offset}
     `;
     return presenters.rows;
