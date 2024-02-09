@@ -1,6 +1,6 @@
 // app/dashboard/presenters/page.tsx
 
-import Pagination from '@/components/presenters/pagination';
+import Pagination from '@/components/pagination';
 import Search from '@/components/presenters/search';
 import { CreatePresenter } from '@/components/presenters/buttons';
 import PresentersList from '@/components/presenters/presenters-list';
@@ -27,7 +27,7 @@ export default async function Page({
         <h2 className="text-xl md:text-2xl">Presenters</h2>
       </header>
       <div className="my-4 flex items-center justify-between gap-2 md:my-8">
-        <Search placeholder="Filter by..." />
+        <Search placeholder="Filter by presenter name, location, or contact..." />
         <CreatePresenter />
       </div>
       <Suspense fallback={PresentersListSkeleton}>

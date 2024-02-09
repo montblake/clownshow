@@ -4,8 +4,6 @@
 
 import { sql } from '@vercel/postgres';
 import {
-  Performance,
-  Booking,
   Presenter,
   User,
   TourField,
@@ -13,19 +11,8 @@ import {
 } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
-// export const fetchPresenters = async () => {
-//   noStore();
-//   try {
-//     const presenters = await sql<Presenter>`
-//     SELECT * FROM clownshow_presenters
-//     `;
-//     return presenters.rows;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
-const ITEMS_PER_PAGE = 12;
+const PRESENTERS_PER_PAGE = 12;
 export const fetchPresentersPages = async (query: string) => {
   try {
     const count = await sql`
@@ -37,7 +24,7 @@ export const fetchPresentersPages = async (query: string) => {
         cpr.contact ILIKE ${`%${query}%`}
     `;
 
-    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(Number(count.rows[0].count) / PRESENTERS_PER_PAGE);
     return totalPages;
   } catch (error) {
     console.error('Database Error:', error);
@@ -49,7 +36,7 @@ export const fetchFilteredPresenters = async (
   query: string,
   currentPage: number,
 ) => {
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const offset = (currentPage - 1) * PRESENTERS_PER_PAGE;
 
   try {
     const presenters = await sql<Presenter>`
@@ -64,7 +51,7 @@ export const fetchFilteredPresenters = async (
         cpr.location ILIKE ${`%${query}%`} OR
         cpr.contact ILIKE ${`%${query}%`}
       ORDER BY cpr.name DESC
-      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      LIMIT ${PRESENTERS_PER_PAGE} OFFSET ${offset}
     `;
     return presenters.rows;
   } catch (error) {
@@ -165,31 +152,6 @@ export const fetchUnbookedPresenters = async () => {
   }
 };
 
-// export const fetchAllBookings = async () => {
-//   noStore();
-//   try {
-//     const data = await sql<BookingsField>`
-//       SELECT
-//         cpr.name AS presenter_name,
-//         cpr.location AS presenter_location,
-//         cpr.contact AS presenter_contact,
-//         array_agg(cp.date_time ORDER BY cp.date_time) AS performances,
-//         cs.show_title AS show_title,
-//         cb.fee,
-//         cb.payment_status
-//       FROM clownshow_bookings cb
-//       JOIN clownshow_performances cp ON cp.booking_id = cb.id
-//       JOIN clownshow_shows cs ON cp.show_id = cs.id
-//       JOIN clownshow_presenters cpr ON cb.presenter_id = cpr.id
-//       GROUP BY cpr.name, cpr.location, cpr.contact, cs.show_title, cb.fee, cb.payment_status
-//     `;
-//     const allBookings = data.rows;
-//     return allBookings;
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error('Failed to fetch bookings data.');
-//   }
-// };
 
 const BOOKINGS_PER_PAGE = 6;
 export const fetchFilteredBookings = async (
@@ -197,7 +159,7 @@ export const fetchFilteredBookings = async (
   currentPage: number,
 ) => {
   noStore();
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const offset = (currentPage - 1) * BOOKINGS_PER_PAGE;
 
   try {
     const data = await sql<BookingsField>`
@@ -217,6 +179,7 @@ export const fetchFilteredBookings = async (
         cpr.name ILIKE ${`%${query}%`} OR
         cpr.location ILIKE ${`%${query}%`} OR
         cpr.contact ILIKE ${`%${query}%`} OR
+        cs.show_title ILIKE ${`%${query}%`} OR
         cb.payment_status ILIKE ${`%${query}%`}
       GROUP BY cpr.name, cpr.location, cpr.contact, cs.show_title, cb.fee, cb.payment_status
       ORDER BY performances
@@ -227,5 +190,28 @@ export const fetchFilteredBookings = async (
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch bookings data.');
+  }
+};
+
+export const fetchBookingsPages = async (query: string) => {
+  try {
+    const count = await sql`
+      SELECT COUNT(DISTINCT cb.id) AS total_bookings
+      FROM clownshow_bookings cb
+      JOIN clownshow_performances cp ON cp.booking_id = cb.id
+      JOIN clownshow_shows cs ON cp.show_id = cs.id
+      JOIN clownshow_presenters cpr ON cb.presenter_id = cpr.id
+      WHERE
+        cpr.name ILIKE ${`%${query}%`} OR
+        cpr.location ILIKE ${`%${query}%`} OR
+        cpr.contact ILIKE ${`%${query}%`} OR
+        cs.show_title ILIKE ${`%${query}%`} OR
+        cb.payment_status ILIKE ${`%${query}%`}
+    `;
+    const totalPages = Math.ceil(Number(count.rows[0].total_bookings) / BOOKINGS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of bookings.');
   }
 };
