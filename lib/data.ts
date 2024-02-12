@@ -3,7 +3,7 @@
 'use server';
 
 import { sql } from '@vercel/postgres';
-import { Presenter, User, TourField, BookingsField } from './definitions';
+import { Presenter, BookingFields, Show } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
 const PRESENTERS_PER_PAGE = 12;
@@ -11,11 +11,11 @@ export const fetchPresentersPages = async (query: string) => {
   try {
     const count = await sql`
       SELECT COUNT(*)
-        FROM clownshow_presenters cpr
+        FROM tour_presenters tpr
       WHERE
-        cpr.name ILIKE ${`%${query}%`} OR
-        cpr.location ILIKE ${`%${query}%`} OR
-        cpr.contact ILIKE ${`%${query}%`}
+        tpr.name ILIKE ${`%${query}%`} OR
+        tpr.location ILIKE ${`%${query}%`} OR
+        tpr.contact_name ILIKE ${`%${query}%`}
     `;
 
     const totalPages = Math.ceil(
@@ -36,115 +36,36 @@ export const fetchFilteredPresenters = async (
 
   try {
     const presenters = await sql<Presenter>`
-      SELECT
-        cpr.id,
-        cpr.name,
-        cpr.location,
-        cpr.contact
-      FROM clownshow_presenters cpr
+      SELECT *
+      FROM tour_presenters tpr
       WHERE
-        cpr.name ILIKE ${`%${query}%`} OR
-        cpr.location ILIKE ${`%${query}%`} OR
-        cpr.contact ILIKE ${`%${query}%`}
-      ORDER BY cpr.name
+        tpr.name ILIKE ${`%${query}%`} OR
+        tpr.location ILIKE ${`%${query}%`} OR
+        tpr.contact_name ILIKE ${`%${query}%`}
+      ORDER BY tpr.name
       LIMIT ${PRESENTERS_PER_PAGE} OFFSET ${offset}
     `;
     return presenters.rows;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch filtered presenters');
+    throw new Error('Failed to fetch filtered presenters.');
   }
 };
 
-export const fetchCardData = async () => {
+export const fetchShows = async () => {
   noStore();
   try {
-    const bookingsCountPromise = sql`SELECT COUNT(*) FROM clownshow_bookings`;
-    const bookingsIncomePromise = sql`SELECT
-      SUM(CASE WHEN payment_status = 'paid' THEN fee
-      ELSE 0 END) AS "paid",
-      SUM(CASE WHEN payment_status = 'pending' THEN fee
-      ELSE 0 END) AS "pending"
-      FROM clownshow_bookings`;
-
-    const data = await Promise.all([
-      bookingsCountPromise,
-      bookingsIncomePromise,
-    ]);
-
-    const numberOfBookings = Number(data[0].rows[0].count ?? '0');
-    const bookingsIncomeReceived = Number(data[1].rows[0].paid ?? '0');
-    const bookingsIncomePending = Number(data[1].rows[0].pending ?? '0');
-    const bookingsIncomeTotal = bookingsIncomeReceived + bookingsIncomePending;
+    const shows = await sql<Show>`
+      SELECT *
+      FROM tour_shows
+    `;
 
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    return {
-      numberOfBookings,
-      bookingsIncomeReceived,
-      bookingsIncomePending,
-      bookingsIncomeTotal,
-    };
+    return shows.rows;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch card data.');
-  }
-};
-
-export const fetchAggBookings = async () => {
-  noStore();
-  try {
-    const data = await sql<TourField>`
-      SELECT
-        cpr.name AS presenter_name,
-        cpr.location AS presenter_location,
-        array_agg(cp.date_time ORDER BY cp.date_time) AS performances
-      FROM clownshow_bookings cb
-      JOIN clownshow_performances cp ON cp.booking_id = cb.id
-      JOIN clownshow_shows cs ON cp.show_id = cs.id
-      JOIN clownshow_presenters cpr ON cb.presenter_id = cpr.id
-      WHERE cs.show_title = 'Moby Dick'
-      GROUP BY cpr.name, cpr.location
-      ORDER BY performances   
-    `;
-    const mobyBookings = data.rows;
-
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    return mobyBookings;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch Moby Dick bookings data.');
-  }
-};
-
-export const fetchUnbookedPresenters = async () => {
-  noStore();
-  try {
-    const data = await sql<Presenter>`
-      SELECT
-        cpr.id,
-        cpr.name,
-        cpr.location
-      FROM clownshow_presenters cpr
-      WHERE NOT EXISTS (
-        SELECT 1
-        FROM clownshow_bookings cb
-        JOIN clownshow_performances cp ON cb.id = cp.booking_id
-        JOIN clownshow_shows cs ON cp.show_id = cs.id
-        WHERE cs.show_title = 'Moby Dick'
-        AND cpr.id = cb.presenter_id
-      )
-      ORDER BY cpr.name
-    `;
-    const presenters: Presenter[] = data.rows;
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    return presenters;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch unbooked presenters.');
+    throw new Error('Failed to fetch shows.');
   }
 };
 
@@ -157,28 +78,29 @@ export const fetchFilteredBookings = async (
   const offset = (currentPage - 1) * BOOKINGS_PER_PAGE;
 
   try {
-    const data = await sql<BookingsField>`
+    const data = await sql<BookingFields>`
       SELECT
-        cpr.name AS presenter_name,
-        cpr.location AS presenter_location,
-        cpr.contact AS presenter_contact,
-        array_agg(cp.date_time ORDER BY cp.date_time) AS performances,
-        cs.show_title AS show_title,
-        cb.fee,
-        cb.payment_status
-      FROM clownshow_bookings cb
-      JOIN clownshow_performances cp ON cp.booking_id = cb.id
-      JOIN clownshow_shows cs ON cp.show_id = cs.id
-      JOIN clownshow_presenters cpr ON cb.presenter_id = cpr.id
+        tb.id,
+        tb.created_at,
+        tb.updated_at,
+        tb.fee,
+        tb.payment_status,
+        tb.performances,
+        tb.created_at,
+        tb.updated_at,
+        ts.show_title AS show_title,
+        tpr.name AS presenter_name,
+        tpr.location AS presenter_location,
+        tpr.contact_name AS presenter_contact
+      FROM tour_bookings tb
+      JOIN tour_presenters tpr ON tb.presenter_id=tpr.id
+      JOIN tour_shows ts ON tb.show_id=ts.id
       WHERE
-        cpr.name ILIKE ${`%${query}%`} OR
-        cpr.location ILIKE ${`%${query}%`} OR
-        cpr.contact ILIKE ${`%${query}%`} OR
-        cs.show_title ILIKE ${`%${query}%`} OR
-        cb.payment_status ILIKE ${`%${query}%`}
-      GROUP BY cpr.name, cpr.location, cpr.contact, cs.show_title, cb.fee, cb.payment_status
-      ORDER BY performances
-      LIMIT ${BOOKINGS_PER_PAGE} OFFSET ${offset}
+        tb.payment_status ILIKE ${`%${query}%`} OR
+        show_title ILIKE ${`%${query}%`} OR
+        tpr.name ILIKE ${`%${query}%`} OR
+        tpr.location ILIKE ${`%${query}%`} OR
+        tpr.contact_name ILIKE ${`%${query}%`}
     `;
     const filteredBookings = data.rows;
     return filteredBookings;
@@ -191,17 +113,8 @@ export const fetchFilteredBookings = async (
 export const fetchBookingsPages = async (query: string) => {
   try {
     const count = await sql`
-      SELECT COUNT(DISTINCT cb.id) AS total_bookings
-      FROM clownshow_bookings cb
-      JOIN clownshow_performances cp ON cp.booking_id = cb.id
-      JOIN clownshow_shows cs ON cp.show_id = cs.id
-      JOIN clownshow_presenters cpr ON cb.presenter_id = cpr.id
-      WHERE
-        cpr.name ILIKE ${`%${query}%`} OR
-        cpr.location ILIKE ${`%${query}%`} OR
-        cpr.contact ILIKE ${`%${query}%`} OR
-        cs.show_title ILIKE ${`%${query}%`} OR
-        cb.payment_status ILIKE ${`%${query}%`}
+      SELECT COUNT(*) AS total_bookings
+      FROM tour_bookings tb
     `;
     const totalPages = Math.ceil(
       Number(count.rows[0].total_bookings) / BOOKINGS_PER_PAGE,

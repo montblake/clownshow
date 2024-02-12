@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import NavLinks from '@/components/dashboard/nav-links';
+import NavLinks from '@/components/tour/nav-links';
 import { PowerIcon } from '@heroicons/react/24/outline';
-import { ModeToggle } from '@/components/dashboard/mode-toggle';
+import { ModeToggle } from '@/components/tour/mode-toggle';
 import { Button } from '@/components/ui/button';
 
 export default function SideNav() {

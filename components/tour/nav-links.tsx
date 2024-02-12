@@ -4,19 +4,21 @@ import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
+  BookOpenIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 const links = [
-  { name: 'Tour', href: '/dashboard', icon: HomeIcon },
+  { name: 'Tour', href: '/tour', icon: HomeIcon },
   {
     name: 'Bookings',
-    href: '/dashboard/bookings',
+    href: '/tour/bookings',
     icon: DocumentDuplicateIcon,
   },
-  { name: 'Presenters', href: '/dashboard/presenters', icon: UserGroupIcon },
+  { name: 'Presenters', href: '/tour/presenters', icon: UserGroupIcon },
+  { name: 'Shows', href: '/tour/shows', icon: BookOpenIcon },
 ];
 
 export default function NavLinks() {

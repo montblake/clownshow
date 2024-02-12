@@ -9,11 +9,8 @@ export default function Home() {
       >
         clownshow
       </h1>
-      <Link
-        href={'/dashboard'}
-        className="absolute bottom-4 text-muted-foreground"
-      >
-        dashboard
+      <Link href={'/tour'} className="absolute bottom-4 text-muted-foreground">
+        Tour
       </Link>
     </main>
   );

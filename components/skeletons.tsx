@@ -190,21 +190,13 @@ export const BookingsListSkeleton = (
   </ul>
 );
 
-export const MobyTourSkeleton = (
+export const ShowsListSkeleton = (
   <div className="h-full w-full rounded-xl bg-muted p-2 md:col-span-4">
     <div className="flex p-4">
       <Skeleton className="h-5 w-5" />
       <Skeleton className="h-4 w-16" />
     </div>
     <div className="flex flex-col items-center gap-4">
-      <div className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="mb-4 h-5 w-1/2" />
-        <Skeleton className="h-4 w-2/3" />
-        <Skeleton className="h-4 w-2/3" />
-        <Skeleton className="h-4 w-2/3" />
-        <Skeleton className="h-4 w-2/3" />
-      </div>
       <div className="flex w-full flex-col items-center gap-2 border-2 border-muted bg-background p-4">
         <Skeleton className="h-5 w-3/4" />
         <Skeleton className="mb-4 h-5 w-1/2" />

@@ -1,59 +1,50 @@
-// app/lib/definitions.ts
+// app/lib/definitions
 
-export type Performance = {
+export type User = {
   id: string;
-  booking_id: string;
-  show_id: string;
-  date_time: string;
-};
-
-export type TourField = {
-  presenter_name: string;
-  presenter_location: string;
-  performances: Date[];
+  name: string;
+  email: string;
+  password_hash: string;
+  created_at: Date;
+  updated_at: Date;
 };
 
 export type Show = {
   id: string;
   show_title: string;
-  user_id: string;
   running_time_in_minutes: number;
   num_intermissions: number;
   cast_size: number;
-};
-
-export type Booking = {
-  id: string;
-  show_id: string;
-  presenter_id: string;
-  performances: Performance[];
-  fee: number;
-  payment_status: 'pending' | 'paid';
+  created_at: Date;
+  updated_at: Date;
 };
 
 export type Presenter = {
   id: string;
   name: string;
   location: string;
-  contact_id: string;
+  contact_name: string;
+  contact_email: string;
+  contact_phone: string;
+  created_at: Date;
+  updated_at: Date;
 };
 
-export type Contact = {
+export type Booking = {
   id: string;
-  name: string;
-  phone: string;
-  email: string;
+  show_id: string;
+  presenter_id: string;
+  fee: number;
+  payment_status: 'pending' | 'paid';
+  performances: Date[];
+  created_at: Date;
+  updated_at: Date;
 };
 
-export type User = {
+export type BookingFields = {
   id: string;
-  name: string;
-  email: string;
-  password: string;
-};
-
-export type BookingsField = {
-  id: string;
+  created_at: Date;
+  updated_at: Date;
   fee: number;
   payment_status: 'pending' | 'paid';
   presenter_name: string;
