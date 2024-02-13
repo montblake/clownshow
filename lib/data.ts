@@ -125,3 +125,19 @@ export const fetchBookingsPages = async (query: string) => {
     throw new Error('Failed to fetch total number of bookings.');
   }
 };
+
+export const fetchBookingOptions = async () => {
+  const presentersPromise = sql`SELECT * FROM tour_presenters`;
+  const showsPromise = sql`SELECT * FROM tour_shows`;
+  const data = await Promise.all([
+    presentersPromise,
+    showsPromise,
+  ]);
+
+  const presenters = data[0].rows;
+  const shows = data[1].rows;
+  return {
+    presenters,
+    shows
+  };
+}

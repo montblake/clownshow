@@ -33,6 +33,11 @@ export async function createPresenter(formData: FormData) {
 }
 
 export async function createBooking(formData: FormData) {
+  console.log(formData);
+  return;
+}
+
+export async function createShow(formData: FormData) {
   // TODO
   return;
 }

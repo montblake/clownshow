@@ -5,7 +5,7 @@ import Link from 'next/link';
 export function CreatePresenter() {
   return (
     <Button variant="outline" size="icon" asChild>
-      <Link href="/dashboard/presenters/create">
+      <Link href="/tour/presenters/create">
         <PlusIcon className="w-6" />
       </Link>
     </Button>

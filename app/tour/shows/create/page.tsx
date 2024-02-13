@@ -1,4 +1,4 @@
-import Form from '@/components/presenters/create-form';
+import Form from '@/components/shows/create-form';
 import Breadcrumbs from '@/components/breadcrumbs';
 
 export default function Page() {
@@ -7,10 +7,10 @@ export default function Page() {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Presenters', href: '/tour/presenters' },
+          { label: 'Shows', href: '/tour/shows' },
           {
-            label: 'Create Presenter',
-            href: '/tour/presenters/create',
+            label: 'Create Show',
+            href: '/tour/shows/create',
             active: true,
           },
         ]}

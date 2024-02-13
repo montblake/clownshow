@@ -9,14 +9,14 @@ export default function Form() {
         {/* Presenter Name */}
         <div className="mb-4">
           <label htmlFor="name" className="mb-2 block text-sm font-medium">
-            Presenter Name
+            Name
           </label>
           <div className="relative mt-2 rounded-md">
             <input
               id="name"
               name="name"
               type="text"
-              placeholder="Enter name"
+              placeholder="Enter venue name"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
             />
           </div>
@@ -25,14 +25,14 @@ export default function Form() {
         {/* Presenter Location */}
         <div className="mb-4">
           <label htmlFor="name" className="mb-2 block text-sm font-medium">
-            Presenter Location
+            Location
           </label>
           <div className="relative mt-2 rounded-md">
             <input
               id="location"
               name="location"
               type="text"
-              placeholder="Enter location"
+              placeholder="Enter venue city and state"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
             />
           </div>
@@ -41,14 +41,46 @@ export default function Form() {
         {/* Presenter Contact */}
         <div className="mb-4">
           <label htmlFor="contact" className="mb-2 block text-sm font-medium">
-            Presenter Contact
+            Contact Name
           </label>
           <div className="relative mt-2 rounded-md">
             <input
               id="contact"
               name="contact"
               type="text"
-              placeholder="Enter contact"
+              placeholder="Enter first and last name"
+              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            />
+          </div>
+        </div>
+
+        {/* Presenter Contact Email */}
+        <div className="mb-4">
+          <label htmlFor="contact" className="mb-2 block text-sm font-medium">
+            Contact Email
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <input
+              id="contact"
+              name="contact"
+              type="text"
+              placeholder="Enter email address for contact"
+              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            />
+          </div>
+        </div>
+
+        {/* Presenter Contact Telephone */}
+        <div className="mb-4">
+          <label htmlFor="contact" className="mb-2 block text-sm font-medium">
+            Contact Phone
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <input
+              id="contact"
+              name="contact"
+              type="text"
+              placeholder="Enter phone number for contact"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
             />
           </div>
@@ -56,7 +88,7 @@ export default function Form() {
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link
-          href="/dashboard/presenters"
+          href="/tour/presenters"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
           Cancel
