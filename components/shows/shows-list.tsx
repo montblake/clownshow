@@ -1,5 +1,6 @@
 import { fetchShows } from '@/lib/data';
 import { Show } from '@/lib/definitions';
+import { EditShow, DeleteShow } from '@/components/shows/buttons';
 
 export default async function BookingsList() {
   const shows: Show[] = await fetchShows();
@@ -11,6 +12,10 @@ export default async function BookingsList() {
           key={show.id}
           className="flex flex-col items-start justify-center rounded-lg bg-slate-50 p-4 text-xl text-slate-800 drop-shadow"
         >
+          <div className="mb-2 flex">
+            <EditShow />
+            <DeleteShow id={show.id} />
+          </div>
           <div className="mb-2">
             <p className="">SHOW ID: {show.id}</p>
             <p>Created:{show.created_at.toLocaleString()}</p>

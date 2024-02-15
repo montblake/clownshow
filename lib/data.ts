@@ -60,8 +60,6 @@ export const fetchShows = async () => {
       FROM tour_shows
     `;
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return shows.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -91,16 +89,20 @@ export const fetchFilteredBookings = async (
         ts.show_title AS show_title,
         tpr.name AS presenter_name,
         tpr.location AS presenter_location,
-        tpr.contact_name AS presenter_contact
+        tpr.contact_name AS presenter_contact,
+        array_agg(tp.date_time) AS performances
       FROM tour_bookings tb
       JOIN tour_presenters tpr ON tb.presenter_id=tpr.id
       JOIN tour_shows ts ON tb.show_id=ts.id
+      LEFT JOIN tour_performances tp ON tp.booking_id=tb.id 
       WHERE
         tb.payment_status ILIKE ${`%${query}%`} OR
         show_title ILIKE ${`%${query}%`} OR
         tpr.name ILIKE ${`%${query}%`} OR
         tpr.location ILIKE ${`%${query}%`} OR
         tpr.contact_name ILIKE ${`%${query}%`}
+      GROUP BY tb.id, ts.show_title, tpr.name, tpr.location, tpr.contact_name
+      ORDER BY tb.id
     `;
     const filteredBookings = data.rows;
     return filteredBookings;
@@ -111,6 +113,7 @@ export const fetchFilteredBookings = async (
 };
 
 export const fetchBookingsPages = async (query: string) => {
+  noStore();
   try {
     const count = await sql`
       SELECT COUNT(*) AS total_bookings
@@ -127,17 +130,35 @@ export const fetchBookingsPages = async (query: string) => {
 };
 
 export const fetchBookingOptions = async () => {
-  const presentersPromise = sql`SELECT * FROM tour_presenters`;
-  const showsPromise = sql`SELECT * FROM tour_shows`;
-  const data = await Promise.all([
-    presentersPromise,
-    showsPromise,
-  ]);
+  noStore();
+  try {
+    const presentersPromise = sql`SELECT * FROM tour_presenters`;
+    const showsPromise = sql`SELECT * FROM tour_shows`;
+    const data = await Promise.all([presentersPromise, showsPromise]);
 
-  const presenters = data[0].rows;
-  const shows = data[1].rows;
-  return {
-    presenters,
-    shows
-  };
-}
+    const presenters = data[0].rows;
+    const shows = data[1].rows;
+    return {
+      presenters,
+      shows,
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch Booking Options.');
+  }
+};
+
+export const fetchAssociatedPerformances = async (bookingId: string) => {
+  noStore();
+  try {
+    const performances = await sql`
+      SELECT * 
+      FROM tour_performances
+      WHERE booking_id=${bookingId}
+    `;
+    return performances.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch Booking Performances.');
+  }
+};

@@ -2,12 +2,21 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { createBooking } from '@/lib/actions';
 import { Show, Presenter } from '@/lib/definitions';
-import { UserGroupIcon, BookOpenIcon, UserCircleIcon, EnvelopeIcon, PhoneIcon, BanknotesIcon, CheckIcon, ClockIcon } from '@heroicons/react/24/outline';
+import {
+  UserGroupIcon,
+  BookOpenIcon,
+  UserCircleIcon,
+  EnvelopeIcon,
+  PhoneIcon,
+  BanknotesIcon,
+  CheckIcon,
+  ClockIcon,
+} from '@heroicons/react/24/outline';
 import CreatePerformances from './create-performances';
 
 export default function Form({
   presenters,
-  shows
+  shows,
 }: {
   presenters: Presenter[];
   shows: Show[];
@@ -23,7 +32,7 @@ export default function Form({
           <div className="relative">
             <select
               id="presenter"
-              name="presenterId"
+              name="presenter_id"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               defaultValue=""
             >
@@ -48,7 +57,7 @@ export default function Form({
           <div className="relative">
             <select
               id="show"
-              name="showId"
+              name="show_id"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               defaultValue=""
             >
@@ -92,7 +101,7 @@ export default function Form({
               <div className="flex items-center">
                 <input
                   id="pending"
-                  name="status"
+                  name="payment_status"
                   type="radio"
                   value="pending"
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
@@ -123,7 +132,7 @@ export default function Form({
             </div>
           </div>
         </fieldset>
-      
+
         {/* Performance Dates */}
         <CreatePerformances />
       </div>

@@ -1,4 +1,8 @@
 import { fetchFilteredPresenters } from '@/lib/data';
+import {
+  EditPresenter,
+  DeletePresenter,
+} from '@/components/presenters/buttons';
 
 export default async function PresentersList({
   query,
@@ -15,6 +19,10 @@ export default async function PresentersList({
           key={p.id}
           className="flex flex-col items-start justify-center rounded-lg bg-slate-50 p-4 text-xl text-slate-800 drop-shadow"
         >
+          <div className="mb-2 flex">
+            <EditPresenter id={p.id} />
+            <DeletePresenter id={p.id} />
+          </div>
           <div className="mb-2">
             <h3 className="text-2xl font-bold">{p.name}</h3>
             <p>{p.location}</p>

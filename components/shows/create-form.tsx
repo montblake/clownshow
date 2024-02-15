@@ -13,7 +13,10 @@ export default function Form() {
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Show Title */}
         <div className="mb-4">
-          <label htmlFor="show_title" className="mb-2 block text-sm font-medium">
+          <label
+            htmlFor="show_title"
+            className="mb-2 block text-sm font-medium"
+          >
             Title
           </label>
           <div className="relative mt-2 rounded-md">
@@ -29,7 +32,10 @@ export default function Form() {
 
         {/* Show Running Time */}
         <div className="mb-4">
-          <label htmlFor="running_time_in_minutes" className="mb-2 block text-sm font-medium">
+          <label
+            htmlFor="running_time_in_minutes"
+            className="mb-2 block text-sm font-medium"
+          >
             Running Time
           </label>
           <div className="relative mt-2 rounded-md">
@@ -45,7 +51,10 @@ export default function Form() {
 
         {/* Number of Intermissions */}
         <div className="mb-4">
-          <label htmlFor="num_intermissions" className="mb-2 block text-sm font-medium">
+          <label
+            htmlFor="num_intermissions"
+            className="mb-2 block text-sm font-medium"
+          >
             Number of Intermissions
           </label>
           <div className="relative mt-2 rounded-md">
@@ -74,7 +83,6 @@ export default function Form() {
             />
           </div>
         </div>
-
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link

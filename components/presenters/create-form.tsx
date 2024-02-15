@@ -40,13 +40,16 @@ export default function Form() {
 
         {/* Presenter Contact */}
         <div className="mb-4">
-          <label htmlFor="contact" className="mb-2 block text-sm font-medium">
+          <label
+            htmlFor="contact_name"
+            className="mb-2 block text-sm font-medium"
+          >
             Contact Name
           </label>
           <div className="relative mt-2 rounded-md">
             <input
-              id="contact"
-              name="contact"
+              id="contact_name"
+              name="contact_name"
               type="text"
               placeholder="Enter first and last name"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -56,13 +59,16 @@ export default function Form() {
 
         {/* Presenter Contact Email */}
         <div className="mb-4">
-          <label htmlFor="contact" className="mb-2 block text-sm font-medium">
+          <label
+            htmlFor="contact_email"
+            className="mb-2 block text-sm font-medium"
+          >
             Contact Email
           </label>
           <div className="relative mt-2 rounded-md">
             <input
-              id="contact"
-              name="contact"
+              id="contact_email"
+              name="contact_email"
               type="text"
               placeholder="Enter email address for contact"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -72,13 +78,16 @@ export default function Form() {
 
         {/* Presenter Contact Telephone */}
         <div className="mb-4">
-          <label htmlFor="contact" className="mb-2 block text-sm font-medium">
+          <label
+            htmlFor="contact_phone"
+            className="mb-2 block text-sm font-medium"
+          >
             Contact Phone
           </label>
           <div className="relative mt-2 rounded-md">
             <input
-              id="contact"
-              name="contact"
+              id="contact_phone"
+              name="contact_phone"
               type="text"
               placeholder="Enter phone number for contact"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"

@@ -53,3 +53,13 @@ export type BookingFields = {
   show_title: string;
   performances: Date[];
 };
+
+export type Performance = {
+  id: string;
+  date_time: Date;
+  show_id: string;
+  presenter_id: string;
+  booking_id: string;
+  created_at: Date;
+  updated_at: Date;
+};

@@ -3,7 +3,7 @@
 import ShowsList from '@/components/shows/shows-list';
 import { Suspense } from 'react';
 import { ShowsListSkeleton } from '@/components/skeletons';
-import CreateShow from '@/components/shows/buttons';
+import { CreateShow } from '@/components/shows/buttons';
 
 export default async function Page() {
   return (

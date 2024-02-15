@@ -30,6 +30,21 @@ export const formatDateTime = (dateStr: string) => {
   return `${dateFormatter.format(datetime)} at ${timeFormatter.format(datetime)}`;
 };
 
+export const extractDateTimePairs = async (dataObject) => {
+  const dateTimeArray = [];
+  for (const key in dataObject) {
+    if (key.startsWith('date-')) {
+      const datePart = dataObject[key];
+      const timeKey = key.replace('date-', 'time-');
+      const timePart = dataObject[timeKey];
+      const dateTimeString = `${datePart}T${timePart}:000Z`;
+      // const dateTimeObject = new Date(dateTimeString);
+      dateTimeArray.push(dateTimeString);
+    }
+  }
+  return dateTimeArray;
+};
+
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
   // display all pages without any ellipsis.

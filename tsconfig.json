@@ -27,6 +27,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "scripts/seed.js",
+    "lib/actions.ts",
   ],
   "exclude": ["node_modules"],
 }

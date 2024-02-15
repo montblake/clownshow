@@ -3,11 +3,7 @@ import Breadcrumbs from '@/components/breadcrumbs';
 import { fetchBookingOptions } from '@/lib/data';
 
 export default async function Page() {
-  
-  const {
-    presenters,
-    shows,
-  } = await fetchBookingOptions();
+  const { presenters, shows } = await fetchBookingOptions();
 
   return (
     <main>
@@ -21,7 +17,7 @@ export default async function Page() {
           },
         ]}
       />
-      <Form presenters={presenters} shows={shows}/>
+      <Form presenters={presenters} shows={shows} />
     </main>
   );
 }
