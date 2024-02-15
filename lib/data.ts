@@ -132,8 +132,8 @@ export const fetchBookingsPages = async (query: string) => {
 export const fetchBookingOptions = async () => {
   noStore();
   try {
-    const presentersPromise = sql`SELECT * FROM tour_presenters`;
-    const showsPromise = sql`SELECT * FROM tour_shows`;
+    const presentersPromise = sql<Presenter>`SELECT * FROM tour_presenters`;
+    const showsPromise = sql<Show>`SELECT * FROM tour_shows`;
     const data = await Promise.all([presentersPromise, showsPromise]);
 
     const presenters = data[0].rows;
