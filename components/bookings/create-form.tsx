@@ -5,9 +5,6 @@ import { Show, Presenter } from '@/lib/definitions';
 import {
   UserGroupIcon,
   BookOpenIcon,
-  UserCircleIcon,
-  EnvelopeIcon,
-  PhoneIcon,
   BanknotesIcon,
   CheckIcon,
   ClockIcon,

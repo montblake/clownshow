@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { serif, sansSerif } from '@/styles/fonts';
+import { sansSerif } from '@/styles/fonts';
 
 export default function Home() {
   return (

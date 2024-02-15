@@ -1,7 +1,5 @@
 import { formatDateTime } from '@/lib/utils';
 import { fetchFilteredBookings } from '@/lib/data';
-import { fetchAssociatedPerformances } from '@/lib/data';
-import { BookingFields } from '@/lib/definitions';
 import { DeleteBooking, EditBooking } from '@/components/bookings/buttons';
 
 export default async function BookingsList({
@@ -44,7 +42,7 @@ export default async function BookingsList({
             <p>Performances:</p>
             <ul className="mb-4 flex w-full flex-col items-start">
               {b.performances?.map((perf: Date, i) => (
-                <li key={i}>{perf?.toString() || 'NONE'}</li>
+                <li key={i}>{formatDateTime(perf?.toString()) || 'NONE'}</li>
               ))}
             </ul>
           </div>

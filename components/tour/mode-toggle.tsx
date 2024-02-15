@@ -10,7 +10,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { clsx } from 'clsx';
 
 export function ModeToggle() {
   const { setTheme } = useTheme();

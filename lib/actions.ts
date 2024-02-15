@@ -126,7 +126,7 @@ export async function createBooking(formData) {
   const entriesData = Object.fromEntries(formData.entries());
   const performances = await extractDateTimePairs(entriesData);
 
-  const newBooking = await sql`
+  await sql`
     INSERT INTO tour_bookings ( presenter_id, show_id, fee, payment_status )
     VALUES (${presenter_id}, ${show_id}, ${fee}, ${payment_status} )
   `;

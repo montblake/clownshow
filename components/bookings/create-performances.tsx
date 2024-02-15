@@ -1,37 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlusIcon, XCircleIcon } from '@heroicons/react/24/outline';
 
 export default function CreatePerformances() {
-  const [performances, setPerformances] = useState([{ date: '', time: '' }]);
+  const [performances, setPerformances] = useState(['performance']);
 
-  const addPerformance = (e) => {
+  const addPerformance = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setPerformances([...performances, { date: '', time: '' }]);
-  };
-
-  const handleDateChange = (i, value) => {
-    const changedPerformances = performances.map((performance, index) => {
-      if (index === i) {
-        return { ...performance, date: value };
-      } else {
-        return performance;
-      }
-    });
-    return changedPerformances;
-  };
-
-  const handleTimeChange = (i, value) => {
-    const changedPerformances = performances.map((performance, index) => {
-      if (index === i) {
-        return { ...performance, time: value };
-      } else {
-        return performance;
-      }
-    });
-    return changedPerformances;
+    setPerformances([...performances, 'performance']);
   };
 
   const handleRemove = (index: number) => {
