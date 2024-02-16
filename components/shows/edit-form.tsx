@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { createShow } from '@/lib/actions';
+import { updateShow } from '@/lib/actions';
+import { ShowFields } from '@/lib/definitions';
 
-export default function Form() {
+export default function Form({ show }: { show: ShowFields }) {
+  const updateShowWithId = updateShow.bind(null, show.id);
   return (
-    <form action={createShow}>
+    <form action={updateShowWithId}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Show Title */}
         <div className="mb-4">
@@ -21,6 +23,7 @@ export default function Form() {
               type="text"
               placeholder="Enter show title"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              defaultValue={show.show_title}
             />
           </div>
         </div>
@@ -40,6 +43,7 @@ export default function Form() {
               type="number"
               placeholder="Enter running time in minutes"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              defaultValue={show.running_time_in_minutes}
             />
           </div>
         </div>
@@ -59,6 +63,7 @@ export default function Form() {
               type="number"
               placeholder="Enter an integer"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              defaultValue={show.num_intermissions}
             />
           </div>
         </div>
@@ -75,6 +80,7 @@ export default function Form() {
               type="number"
               placeholder="Enter an integer"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              defaultValue={show.cast_size}
             />
           </div>
         </div>
@@ -86,7 +92,7 @@ export default function Form() {
         >
           Cancel
         </Link>
-        <Button type="submit">Create</Button>
+        <Button type="submit">Edit</Button>
       </div>
     </form>
   );

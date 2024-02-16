@@ -14,9 +14,7 @@ export default async function Page() {
           <CreateShow />
         </div>
       </header>
-      <div className="my-4 flex items-center justify-between gap-2 md:my-8">
-        {/* <CreateShow /> */}
-      </div>
+
       <Suspense fallback={ShowsListSkeleton}>
         <ShowsList />
       </Suspense>

@@ -19,6 +19,14 @@ export type Show = {
   updated_at: Date;
 };
 
+export type ShowFields = {
+  id: string;
+  show_title: string;
+  running_time_in_minutes: number;
+  num_intermissions: number;
+  cast_size: number;
+};
+
 export type Presenter = {
   id: string;
   name: string;
@@ -30,6 +38,14 @@ export type Presenter = {
   updated_at: Date;
 };
 
+export type PresenterFields = {
+  id: string;
+  name: string;
+  location: string;
+  contact_name: string;
+  contact_email: string;
+  contact_phone: string;
+};
 export type Booking = {
   id: string;
   show_id: string;

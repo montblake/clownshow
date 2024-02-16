@@ -6,7 +6,9 @@ import { sql } from '@vercel/postgres';
 import { Presenter, BookingFields, Show } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
+// PRESENTERS
 const PRESENTERS_PER_PAGE = 12;
+
 export const fetchPresentersPages = async (query: string) => {
   try {
     const count = await sql`
@@ -52,6 +54,21 @@ export const fetchFilteredPresenters = async (
   }
 };
 
+export const fetchPresenterById = async (id: string) => {
+  try {
+    const presenter = await sql<Presenter>`
+      SELECT *
+      FROM tour_presenters
+      WHERE tour_presenters.id = ${id}
+    `;
+    return presenter.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to fetch presenter by ID: ${id}`);
+  }
+};
+
+// SHOWS
 export const fetchShows = async () => {
   noStore();
   try {
@@ -67,6 +84,21 @@ export const fetchShows = async () => {
   }
 };
 
+export const fetchShowById = async (id: string) => {
+  try {
+    const show = await sql<Show>`
+      SELECT *
+      FROM tour_shows
+      WHERE tour_shows.id = id
+    `;
+    return show.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to fetch show with ID: ${id}`);
+  }
+};
+
+// BOOKINGS
 const BOOKINGS_PER_PAGE = 6;
 export const fetchFilteredBookings = async (
   query: string,
