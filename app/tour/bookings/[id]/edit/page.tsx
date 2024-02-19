@@ -5,8 +5,6 @@ import { fetchBookingOptions } from '@/lib/data';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  // const booking = await fetchBookingById(id);
-  // const { presenters, shows } = await fetchBookingOptions();
   const booking = await fetchBookingById(id);
   const { presenters, shows } = await fetchBookingOptions();
 

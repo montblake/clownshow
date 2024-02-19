@@ -77,6 +77,7 @@ export const fetchShows = async () => {
     const shows = await sql<Show>`
       SELECT *
       FROM tour_shows
+      ORDER BY tour_shows.show_title
     `;
 
     return shows.rows;
@@ -88,12 +89,14 @@ export const fetchShows = async () => {
 
 export const fetchShowById = async (id: string) => {
   noStore();
+  console.log("SHOW ID", id);
   try {
     const show = await sql<Show>`
       SELECT *
       FROM tour_shows
-      WHERE tour_shows.id = id
+      WHERE tour_shows.id = ${id}
     `;
+    console.log("SHOW", show);
     return show.rows[0];
   } catch (error) {
     console.error('Database Error:', error);

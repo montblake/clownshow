@@ -4,7 +4,7 @@ import { fetchShowById } from '@/lib/data';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  const show = await fetchShowById();
+  const show = await fetchShowById(id);
 
   return (
     <main>
