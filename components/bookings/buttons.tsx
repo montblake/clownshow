@@ -26,15 +26,13 @@ export function DeleteBooking({ id }: { id: string }) {
   );
 }
 
-export function EditBooking({ id }: { id: string }) {
+export function UpdateBooking({ id }: { id: string }) {
   return (
     <Button variant="outline" size="icon" asChild>
-      {/* <Link href={`/tour/bookings/${id}/edit`}> */}
-      <>
+      <Link href={`/tour/bookings/${id}/edit`}>
         <span className="sr-only">Edit</span>
         <PencilIcon className="w-4" />
-      </>
-      {/* </Link> */}
+      </Link>
     </Button>
   );
 }

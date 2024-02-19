@@ -27,37 +27,27 @@ const CreatePresenter = PresenterFormSchema.omit({
 });
 
 export async function createPresenter(formData: FormData) {
-  try {
-    const { name, location, contact_name, contact_email, contact_phone } =
-      CreatePresenter.parse({
-        name: formData.get('name'),
-        location: formData.get('location'),
-        contact_name: formData.get('contact_name'),
-        contact_email: formData.get('contact_email'),
-        contact_phone: formData.get('contact_phone'),
-      });
+  const { name, location, contact_name, contact_email, contact_phone } =
+    CreatePresenter.parse({
+      name: formData.get('name'),
+      location: formData.get('location'),
+      contact_name: formData.get('contact_name'),
+      contact_email: formData.get('contact_email'),
+      contact_phone: formData.get('contact_phone'),
+    });
 
-    await sql`
+  await sql`
     INSERT INTO tour_presenters ( name, location, contact_name, contact_email, contact_phone )
     VALUES (${name}, ${location}, ${contact_name}, ${contact_email}, ${contact_phone})
     `;
 
-    revalidatePath('/tour/presenters');
-    redirect('/tour/presenters');
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to create presenter');
-  }
+  revalidatePath('/tour/presenters');
+  redirect('/tour/presenters');
 }
 
 export async function deletePresenter(id: string) {
-  try {
-    await sql`DELETE FROM tour_presenters WHERE id = ${id}`;
-    revalidatePath('/tour/presenters');
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error(`Failed to delete presenter with ID: ${id}`);
-  }
+  await sql`DELETE FROM tour_presenters WHERE id = ${id}`;
+  revalidatePath('/tour/presenters');
 }
 
 const UpdatePresenter = PresenterFormSchema.omit({
@@ -66,24 +56,17 @@ const UpdatePresenter = PresenterFormSchema.omit({
   updated_at: true,
 });
 
-export async function updatePresenter({
-  id,
-  formData,
-}: {
-  id: string;
-  formData: FormData;
-}) {
-  try {
-    const { name, location, contact_name, contact_email, contact_phone } =
-      UpdatePresenter.parse({
-        name: formData.get('name'),
-        location: formData.get('location'),
-        contact_name: formData.get('contact_name'),
-        contact_email: formData.get('contact_email'),
-        contact_phone: formData.get('contact_phone'),
-      });
+export async function updatePresenter(id: string, formData: FormData) {
+  const { name, location, contact_name, contact_email, contact_phone } =
+    UpdatePresenter.parse({
+      name: formData.get('name'),
+      location: formData.get('location'),
+      contact_name: formData.get('contact_name'),
+      contact_email: formData.get('contact_email'),
+      contact_phone: formData.get('contact_phone'),
+    });
 
-    await sql<PresenterFields>`
+  await sql<PresenterFields>`
     UPDATE tour_presenters
     SET 
     name = ${name}, 
@@ -94,12 +77,8 @@ export async function updatePresenter({
     WHERE
     tour_presenters.id = ${id}
     `;
-    revalidatePath('/tour/presenters');
-    redirect('/tour/presenters');
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error(`Failed to update presenter with Id: ${id}`);
-  }
+  revalidatePath('/tour/presenters');
+  redirect('/tour/presenters');
 }
 
 // SHOWS
@@ -120,13 +99,8 @@ const CreateShow = ShowFormSchema.omit({
 });
 FormData;
 export async function createShow(formData: FormData) {
-  try {
-    const {
-      show_title,
-      running_time_in_minutes,
-      num_intermissions,
-      cast_size,
-    } = CreateShow.parse({
+  const { show_title, running_time_in_minutes, num_intermissions, cast_size } =
+    CreateShow.parse({
       show_title: formData.get('show_title'),
       running_time_in_minutes:
         Number(formData.get('running_time_in_minutes')) || 0,
@@ -134,27 +108,18 @@ export async function createShow(formData: FormData) {
       cast_size: Number(formData.get('cast_size')) || 1,
     });
 
-    await sql`
+  await sql`
     INSERT INTO tour_shows ( show_title, running_time_in_minutes, num_intermissions, cast_size )
     VALUES (${show_title}, ${running_time_in_minutes}, ${num_intermissions}, ${cast_size} )
     `;
 
-    revalidatePath('/tour/shows');
-    redirect('/tour/shows');
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to create show');
-  }
+  revalidatePath('/tour/shows');
+  redirect('/tour/shows');
 }
 
 export async function deleteShow(id: string) {
-  try {
-    await sql`DELETE FROM tour_shows WHERE id = ${id}`;
-    revalidatePath('/tour/shows');
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error(`Failed to delete show with Id: ${id}`);
-  }
+  await sql`DELETE FROM tour_shows WHERE id = ${id}`;
+  revalidatePath('/tour/shows');
 }
 
 const UpdateShow = ShowFormSchema.omit({
@@ -164,20 +129,15 @@ const UpdateShow = ShowFormSchema.omit({
 });
 
 export async function updateShow(id: string, formData: FormData) {
-  try {
-    const {
-      show_title,
-      running_time_in_minutes,
-      num_intermissions,
-      cast_size,
-    } = UpdateShow.parse({
+  const { show_title, running_time_in_minutes, num_intermissions, cast_size } =
+    UpdateShow.parse({
       show_title: formData.get('show_title'),
       running_time_in_minutes: Number(formData.get('running_time_in_minutes')),
       num_intermissions: Number(formData.get('num_intermissions')),
       cast_size: Number(formData.get('cast_size')),
     });
 
-    await sql`
+  await sql`
     UPDATE tour_shows
     SET 
     show_title = ${show_title}, running_time_in_minutes = ${running_time_in_minutes},
@@ -187,12 +147,8 @@ export async function updateShow(id: string, formData: FormData) {
     id = ${id}
     `;
 
-    revalidatePath('/tour/shows');
-    redirect('/tour/shows');
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error(`Failed to update show with Id: ${id}`);
-  }
+  revalidatePath('/tour/shows');
+  redirect('/tour/shows');
 }
 
 // BOOKINGS
@@ -215,43 +171,26 @@ const CreateBooking = BookingFormData.omit({
 });
 
 export async function createBooking(formData: FormData) {
-  try {
-    const { presenter_id, show_id, fee, payment_status } = CreateBooking.parse({
-      presenter_id: formData.get('presenter_id'),
-      show_id: formData.get('show_id'),
-      fee: Number(formData.get('fee')),
-      payment_status: formData.get('payment_status'),
-    });
+  const { presenter_id, show_id, fee, payment_status } = CreateBooking.parse({
+    presenter_id: formData.get('presenter_id'),
+    show_id: formData.get('show_id'),
+    fee: Number(formData.get('fee')),
+    payment_status: formData.get('payment_status'),
+  });
 
-    const entriesData = Object.fromEntries(formData.entries());
-    const performances = await extractDateTimePairs(entriesData);
-
-    await sql`
-    INSERT INTO tour_bookings ( presenter_id, show_id, fee, payment_status )
-    VALUES (${presenter_id}, ${show_id}, ${fee}, ${payment_status} )
+  const entriesData = Object.fromEntries(formData.entries());
+  const performances = await extractDateTimePairs(entriesData);
+  console.log('PERFORMANCES', performances);
+  const bookingResult = await sql`
+      INSERT INTO tour_bookings (presenter_id, show_id, fee, payment_status)
+      VALUES (${presenter_id}, ${show_id}, ${fee}, ${payment_status})
+      RETURNING id
     `;
+  const bookingId = bookingResult.rows[0].id;
+  console.log('BOOKING ID', bookingId);
 
-    const foundBooking = await sql`
-    SELECT * FROM tour_bookings
-    WHERE tour_bookings.presenter_id=${presenter_id}
-    AND tour_bookings.show_id=${show_id}
-    `;
-
-    const booking = foundBooking.rows[0];
-
-    performances.forEach((p) => {
-      sql`
-      INSERT INTO tour_performances ( show_id, presenter_id, booking_id, date_time )
-      VALUES (${booking.show_id}, ${booking.presenter_id}, ${booking.id}, ${p})
-      `;
-    });
-
-    revalidatePath('/tour/bookings');
-    redirect('/tour/bookings');
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to create booking.');
-  }
+  revalidatePath('/tour/bookings');
+  redirect('/tour/bookings');
 }
 
 export async function deleteBooking(id: string) {
@@ -265,11 +204,6 @@ export async function deleteBooking(id: string) {
   }
 }
 
-export async function updateBooking(id: string) {
-  try {
-    return;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error(`Failed to update booking with Id: ${id}`);
-  }
+export async function updateBooking(id: string, formData: FormData) {
+  return;
 }

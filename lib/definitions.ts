@@ -59,13 +59,13 @@ export type Booking = {
 
 export type BookingFields = {
   id: string;
-  created_at: Date;
-  updated_at: Date;
   fee: number;
   payment_status: 'pending' | 'paid';
+  presenter_id: string;
   presenter_name: string;
   presenter_location: string;
   presenter_contact: string;
+  show_id: string;
   show_title: string;
   performances: Date[];
 };

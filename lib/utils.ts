@@ -30,6 +30,12 @@ export const formatDateTime = (dateStr: string) => {
   return `${dateFormatter.format(datetime)} at ${timeFormatter.format(datetime)}`;
 };
 
+export const reverseDateTime = (dateStr: string) => {
+  console.log('DATE STRING', dateStr);
+  const datetime = new Date(dateStr);
+  console.log('DATETIME', datetime.getMonth());
+};
+
 export const extractDateTimePairs = async (dataObject) => {
   const dateTimeArray = [];
   for (const key in dataObject) {
@@ -37,7 +43,7 @@ export const extractDateTimePairs = async (dataObject) => {
       const datePart = dataObject[key];
       const timeKey = key.replace('date-', 'time-');
       const timePart = dataObject[timeKey];
-      const dateTimeString = `${datePart}T${timePart}:000Z`;
+      const dateTimeString = `${datePart}T${timePart}:000`;
       // const dateTimeObject = new Date(dateTimeString);
       dateTimeArray.push(dateTimeString);
     }

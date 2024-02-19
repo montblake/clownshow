@@ -10,6 +10,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 const PRESENTERS_PER_PAGE = 12;
 
 export const fetchPresentersPages = async (query: string) => {
+  noStore();
   try {
     const count = await sql`
       SELECT COUNT(*)
@@ -35,7 +36,7 @@ export const fetchFilteredPresenters = async (
   currentPage: number,
 ) => {
   const offset = (currentPage - 1) * PRESENTERS_PER_PAGE;
-
+  noStore();
   try {
     const presenters = await sql<Presenter>`
       SELECT *
@@ -55,6 +56,7 @@ export const fetchFilteredPresenters = async (
 };
 
 export const fetchPresenterById = async (id: string) => {
+  noStore();
   try {
     const presenter = await sql<Presenter>`
       SELECT *
@@ -85,6 +87,7 @@ export const fetchShows = async () => {
 };
 
 export const fetchShowById = async (id: string) => {
+  noStore();
   try {
     const show = await sql<Show>`
       SELECT *
@@ -104,9 +107,8 @@ export const fetchFilteredBookings = async (
   query: string,
   currentPage: number,
 ) => {
-  noStore();
   const offset = (currentPage - 1) * BOOKINGS_PER_PAGE;
-
+  noStore();
   try {
     const data = await sql<BookingFields>`
       SELECT
@@ -115,10 +117,11 @@ export const fetchFilteredBookings = async (
         tb.updated_at,
         tb.fee,
         tb.payment_status,
-        tb.performances,
         tb.created_at,
         tb.updated_at,
+        ts.id AS show_id,
         ts.show_title AS show_title,
+        tpr.id AS presenter_id,
         tpr.name AS presenter_name,
         tpr.location AS presenter_location,
         tpr.contact_name AS presenter_contact,
@@ -133,11 +136,13 @@ export const fetchFilteredBookings = async (
         tpr.name ILIKE ${`%${query}%`} OR
         tpr.location ILIKE ${`%${query}%`} OR
         tpr.contact_name ILIKE ${`%${query}%`}
-      GROUP BY tb.id, ts.show_title, tpr.name, tpr.location, tpr.contact_name
+      GROUP BY tb.id, ts.id, ts.show_title, tpr.id, tpr.name, tpr.location, tpr.contact_name
       ORDER BY tb.id
       LIMIT ${BOOKINGS_PER_PAGE} OFFSET ${offset}
     `;
     const filteredBookings = data.rows;
+
+    console.log('FILTERED BOOKINGS', filteredBookings);
     return filteredBookings;
   } catch (error) {
     console.error('Database Error:', error);
@@ -193,5 +198,35 @@ export const fetchBookingOptions = async () => {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch Booking Options.');
+  }
+};
+
+export const fetchBookingById = async (id: string) => {
+  noStore();
+  try {
+    const booking = await sql<BookingFields>`
+    SELECT
+      tb.id,
+      tb.fee,
+      tb.payment_status,
+      tb.show_id,
+      ts.show_title AS show_title,
+      tb.presenter_id,
+      tpr.name AS presenter_name,
+      tpr.location AS presenter_location,
+      tpr.contact_name AS presenter_contact,
+      array_agg(tp.date_time) AS performances
+    FROM tour_bookings tb
+    JOIN tour_presenters tpr ON tb.presenter_id=tpr.id
+    JOIN tour_shows ts ON tb.show_id=ts.id
+    LEFT JOIN tour_performances tp ON tp.booking_id=tb.id 
+    WHERE
+      tb.id = ${id}
+    GROUP BY tb.id, ts.id, ts.show_title, tpr.id, tpr.name, tpr.location, tpr.contact_name
+    `;
+    return booking.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to fetch booking with ID: ${id}`);
   }
 };

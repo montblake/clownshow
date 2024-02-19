@@ -1,6 +1,6 @@
 import { formatDateTime } from '@/lib/utils';
 import { fetchFilteredBookings } from '@/lib/data';
-import { DeleteBooking, EditBooking } from '@/components/bookings/buttons';
+import { DeleteBooking, UpdateBooking } from '@/components/bookings/buttons';
 
 export default async function BookingsList({
   query,
@@ -20,13 +20,11 @@ export default async function BookingsList({
           className="flex flex-col items-start justify-center rounded-lg bg-slate-50 p-4 text-xl text-slate-800 drop-shadow"
         >
           <div className="mb-2 flex">
+            <UpdateBooking id={b.id} />
             <DeleteBooking id={b.id} />
-            <EditBooking id={b.id} />
           </div>
           <div className="mb-2">
             <p className="">BOOKING ID: {b.id}</p>
-            <p>Created:{b.created_at.toLocaleString()}</p>
-            <p>Updated: {b.updated_at.toLocaleString()}</p>
           </div>
           <div className="mb-2">
             <p>Presenter:{b.presenter_name}</p>
@@ -40,11 +38,11 @@ export default async function BookingsList({
           </div>
           <div>
             <p>Performances:</p>
-            <ul className="mb-4 flex w-full flex-col items-start">
+            {/* <ul className="mb-4 flex w-full flex-col items-start">
               {b.performances?.map((perf: Date, i) => (
                 <li key={i}>{formatDateTime(perf?.toString()) || 'NONE'}</li>
               ))}
-            </ul>
+            </ul> */}
           </div>
         </li>
       ))}
