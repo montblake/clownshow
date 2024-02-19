@@ -6,7 +6,7 @@ import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { extractDateTimePairs } from '@/lib/utils';
-import { PresenterFields } from './definitions';
+import { PresenterFields, PerformanceFields, ShowFields } from './definitions';
 
 // PRESENTERS
 const PresenterFormSchema = z.object({
@@ -152,7 +152,7 @@ export async function updateShow(id: string, formData: FormData) {
 }
 
 // BOOKINGS
-const BookingFormData = z.object({
+const BookingSchema = z.object({
   id: z.string(),
   created_at: z.date(),
   updated_at: z.date(),
@@ -160,14 +160,14 @@ const BookingFormData = z.object({
   show_id: z.string(),
   fee: z.number(),
   payment_status: z.string(),
-  performances: z.date().array(),
+  // performances: z.array(PerformanceSchema),
 });
 
-const CreateBooking = BookingFormData.omit({
+const CreateBooking = BookingSchema.omit({
   id: true,
   created_at: true,
   updated_at: true,
-  performances: true,
+  // performances: true,
 });
 
 export async function createBooking(formData: FormData) {
@@ -189,9 +189,27 @@ export async function createBooking(formData: FormData) {
   const bookingId = bookingResult.rows[0].id;
   console.log('BOOKING ID', bookingId);
 
+  for (const performance of performances) {
+    await sql`
+    INSERT INTO tour_performances (date_time, show_id, presenter_id, booking_id)
+    VALUES (${performance}, ${show_id}, ${presenter_id}, ${bookingId})
+    `;
+  }
+
   revalidatePath('/tour/bookings');
   redirect('/tour/bookings');
 }
+
+// export type Performance = {
+//   id: string;
+//   date_time: Date;
+//   show_id: string;
+//   presenter_id: string;
+//   booking_id: string;
+//   created_at: Date;
+//   updated_at: Date;
+// };
+
 
 export async function deleteBooking(id: string) {
   try {

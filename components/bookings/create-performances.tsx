@@ -5,15 +5,27 @@ import { Button } from '@/components/ui/button';
 import { PlusIcon, XCircleIcon } from '@heroicons/react/24/outline';
 
 export default function CreatePerformances() {
-  const [performances, setPerformances] = useState(['performance']);
+  const [performances, setPerformances] = useState([{date: "", time: ""}]);
 
-  const addPerformance = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleAddPerformance = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setPerformances([...performances, 'performance']);
+    setPerformances([...performances, {date: "", time: ""}]);
   };
 
-  const handleRemove = (index: number) => {
+  const handleRemovePerformance = (index: number) => {
     setPerformances(performances.filter((_, i) => i !== index));
+  };
+
+  const handleDateChange = (index: number, value: string) => {
+    const newPerformances = [...performances];
+    newPerformances[index].date = value;
+    setPerformances(newPerformances);
+  };
+
+  const handleTimeChange = (index: number, value: string) => {
+    const newPerformances = [...performances];
+    newPerformances[index].time = value;
+    setPerformances(newPerformances);
   };
 
   return (
@@ -22,7 +34,7 @@ export default function CreatePerformances() {
         <legend className="mb-2 block text-sm font-medium">
           Set performances
         </legend>
-        <Button variant="outline" size="sm" onClick={addPerformance}>
+        <Button variant="outline" size="sm" onClick={handleAddPerformance}>
           <PlusIcon className="w-4" />
         </Button>
       </div>
@@ -40,7 +52,7 @@ export default function CreatePerformances() {
                 type="date"
                 name={`date-${i}`}
                 id={`performance-${i}-date`}
-                // onChange={(e) => handleDateChange(i, e.target.value)}
+                onChange={(e) => handleDateChange(i, e.target.value)}
                 className="rounded-md border border-gray-200 bg-white px-[14px] py-3"
               />
             </div>
@@ -52,12 +64,12 @@ export default function CreatePerformances() {
                 type="time"
                 name={`time-${i}`}
                 id={`time-${i}`}
-                // onChange={(e) => handleTimeChange(i, e.target.value)}
+                onChange={(e) => handleTimeChange(i, e.target.value)}
                 className="rounded-md border border-gray-200 bg-white px-[14px] py-3"
               />
             </div>
             {/* <Button variant="outline" size="icon" onClick={()=>handleRemove(i)}> */}
-            <XCircleIcon className="w-8" onClick={() => handleRemove(i)} />
+            <XCircleIcon className="w-8" onClick={() => handleRemovePerformance(i)} />
             {/* </Button> */}
           </div>
         ))}

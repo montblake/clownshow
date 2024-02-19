@@ -38,11 +38,12 @@ export default async function BookingsList({
           </div>
           <div>
             <p>Performances:</p>
-            {/* <ul className="mb-4 flex w-full flex-col items-start">
+            <ul className="mb-4 flex w-full flex-col items-start">
               {b.performances?.map((perf: Date, i) => (
-                <li key={i}>{formatDateTime(perf?.toString()) || 'NONE'}</li>
+                <li key={i}>
+                  {perf?.toLocaleString().replace(',', " at") || 'NONE'}</li>
               ))}
-            </ul> */}
+            </ul>
           </div>
         </li>
       ))}
