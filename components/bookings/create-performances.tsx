@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 import { PlusIcon, XCircleIcon } from '@heroicons/react/24/outline';
 
 export default function CreatePerformances() {
-  const [performances, setPerformances] = useState([{date: "", time: ""}]);
+  const [performances, setPerformances] = useState([{ date: '', time: '' }]);
 
   const handleAddPerformance = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setPerformances([...performances, {date: "", time: ""}]);
+    setPerformances([...performances, { date: '', time: '' }]);
   };
 
   const handleRemovePerformance = (index: number) => {
@@ -69,7 +69,10 @@ export default function CreatePerformances() {
               />
             </div>
             {/* <Button variant="outline" size="icon" onClick={()=>handleRemove(i)}> */}
-            <XCircleIcon className="w-8" onClick={() => handleRemovePerformance(i)} />
+            <XCircleIcon
+              className="w-8"
+              onClick={() => handleRemovePerformance(i)}
+            />
             {/* </Button> */}
           </div>
         ))}

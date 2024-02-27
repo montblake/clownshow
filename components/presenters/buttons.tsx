@@ -7,7 +7,7 @@ export function CreatePresenter() {
   return (
     <Button variant="outline" size="icon" asChild>
       <Link href="/tour/presenters/create">
-        <PlusIcon className="w-6" />
+        <PlusIcon className="w-6 h-6" />
       </Link>
     </Button>
   );
@@ -17,7 +17,7 @@ export function EditPresenter({ id }: { id: string }) {
   return (
     <Button variant="outline" size="icon" asChild>
       <Link href={`/tour/presenters/${id}/edit`}>
-        <PencilIcon className="w-6" />
+        <PencilIcon className="w-4 h-4" />
       </Link>
     </Button>
   );
@@ -30,7 +30,7 @@ export function DeletePresenter({ id }: { id: string }) {
     <form action={deletePresenterWithId}>
       <Button variant="outline" size="icon">
         <span className="sr-only">Delete</span>
-        <TrashIcon className="w-4" />
+        <TrashIcon className="w-4 h-4" />
       </Button>
     </form>
   );

@@ -67,7 +67,7 @@ export type BookingFields = {
   presenter_contact: string;
   show_id: string;
   show_title: string;
-  performances: Date[];
+  performances: { id: string; date_time: Date }[];
 };
 
 export type Performance = {

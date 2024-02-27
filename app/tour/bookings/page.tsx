@@ -31,7 +31,7 @@ export default async function Page({
         <SearchBookings placeholder="Filter by presenter name, location, contact, show title, or payment status..." />
       </header>
       <div className="my-2 flex w-full flex-col items-center justify-between gap-2 md:my-4">
-        <Suspense key={query + currentPage} fallback={BookingsListSkeleton}>
+        <Suspense key={query + currentPage} fallback={<BookingsListSkeleton />}>
           <BookingsList query={query} currentPage={currentPage} />
         </Suspense>
         <div className="mt-5 flex w-full justify-center">

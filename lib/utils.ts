@@ -36,15 +36,32 @@ export const reverseDateTime = (dateStr: string) => {
   console.log('DATETIME', datetime.getMonth());
 };
 
-export const extractDateTimePairs = async (dataObject) => {
+export const extractDateTimePairs_Update = async (dataObject: any) => {
   const dateTimeArray = [];
   for (const key in dataObject) {
     if (key.startsWith('date-')) {
+      const id = key.replace('date-', '');
       const datePart = dataObject[key];
       const timeKey = key.replace('date-', 'time-');
       const timePart = dataObject[timeKey];
       const dateTimeString = `${datePart}T${timePart}:000`;
-      // const dateTimeObject = new Date(dateTimeString);
+      const object = { id: id, dateTime: dateTimeString };
+      dateTimeArray.push(object);
+    }
+  }
+  return dateTimeArray;
+};
+
+export const extractDateTimePairs_Create = async (dataObject: any) => {
+  const dateTimeArray = [];
+  for (const key in dataObject) {
+    if (key.startsWith('date-')) {
+      // const id = key.replace('date-', '');
+      const datePart = dataObject[key];
+      const timeKey = key.replace('date-', 'time-');
+      const timePart = dataObject[timeKey];
+      const dateTimeString = `${datePart}T${timePart}:000`;
+      // const object = { id: id, dateTime: dateTimeString }
       dateTimeArray.push(dateTimeString);
     }
   }
@@ -82,4 +99,31 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     '...',
     totalPages,
   ];
+};
+
+export const reverseFormatDate = (rawDate: string) => {
+  let date = rawDate.split('/');
+  if (date[1].length === 1) {
+    date[1] = `0${date[1]}`;
+  }
+  if (date[0].length === 1) {
+    date[0] = `0${date[0]}`;
+  }
+  return `${date[2]}-${date[0]}-${date[1]}`;
+};
+
+export const reverseFormatTime = (rawTime: string) => {
+  let [time, indicator] = rawTime.trim().split(' ');
+
+  let [hours, minutes] = time.split(':');
+  if (indicator === 'PM') {
+    hours = (parseInt(hours) + 12).toString();
+  }
+  if (hours.length === 1) {
+    hours = `0${hours}`;
+  }
+  if (minutes.length === 1) {
+    minutes = `0${minutes}`;
+  }
+  return `${hours}:${minutes}`;
 };

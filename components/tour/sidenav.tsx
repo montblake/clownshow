@@ -11,7 +11,7 @@ export default function SideNav() {
         className="m-1 mb-2 flex h-20 flex-col items-center justify-center rounded-xl bg-background bg-brand p-4 text-3xl font-bold drop-shadow hover:border-2 hover:border-brand lg:h-40"
         href="/"
       >
-        <p className="rotate-3 text-white">c</p>
+        <p className="rotate-3 text-white">clownshow</p>
       </Link>
       <div className="m-1 flex grow flex-col justify-between gap-2">
         <NavLinks />

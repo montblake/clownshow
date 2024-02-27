@@ -5,8 +5,11 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { extractDateTimePairs } from '@/lib/utils';
-import { PresenterFields, PerformanceFields, ShowFields } from './definitions';
+import {
+  extractDateTimePairs_Create,
+  extractDateTimePairs_Update,
+} from '@/lib/utils';
+import { PresenterFields, ShowFields } from './definitions';
 
 // PRESENTERS
 const PresenterFormSchema = z.object({
@@ -167,7 +170,6 @@ const CreateBooking = BookingSchema.omit({
   id: true,
   created_at: true,
   updated_at: true,
-  // performances: true,
 });
 
 export async function createBooking(formData: FormData) {
@@ -179,7 +181,7 @@ export async function createBooking(formData: FormData) {
   });
 
   const entriesData = Object.fromEntries(formData.entries());
-  const performances = await extractDateTimePairs(entriesData);
+  const performances = await extractDateTimePairs_Create(entriesData);
   console.log('PERFORMANCES', performances);
   const bookingResult = await sql`
       INSERT INTO tour_bookings (presenter_id, show_id, fee, payment_status)
@@ -200,17 +202,6 @@ export async function createBooking(formData: FormData) {
   redirect('/tour/bookings');
 }
 
-// export type Performance = {
-//   id: string;
-//   date_time: Date;
-//   show_id: string;
-//   presenter_id: string;
-//   booking_id: string;
-//   created_at: Date;
-//   updated_at: Date;
-// };
-
-
 export async function deleteBooking(id: string) {
   try {
     await sql`DELETE FROM tour_performances tp WHERE tp.booking_id = ${id}`;
@@ -222,6 +213,89 @@ export async function deleteBooking(id: string) {
   }
 }
 
+const UpdateBooking = BookingSchema.omit({
+  id: true,
+  created_at: true,
+  updated_at: true,
+});
+
 export async function updateBooking(id: string, formData: FormData) {
-  return;
+  const { presenter_id, show_id, fee, payment_status } = UpdateBooking.parse({
+    presenter_id: formData.get('presenter_id'),
+    show_id: formData.get('show_id'),
+    fee: Number(formData.get('fee')),
+    payment_status: formData.get('payment_status'),
+  });
+
+  const entriesData = Object.fromEntries(formData.entries());
+  const performances: { id: string; dateTime: string }[] =
+    await extractDateTimePairs_Update(entriesData);
+  // console.log('PERFORMANCES', performances);
+
+  await sql`
+  UPDATE tour_bookings
+  SET 
+    presenter_id = ${presenter_id},
+    show_id = ${show_id},
+    fee = ${fee},
+    payment_status = ${payment_status}
+  WHERE
+  id = ${id}
+  `;
+
+  for (const performance of performances) {
+    await sql`
+    UPDATE tour_performances
+    SET 
+    date_time = ${performance.dateTime}
+    WHERE
+    id = ${performance.id}
+    `;
+  }
+
+  revalidatePath('/tour/bookings');
+  redirect('/tour/bookings');
+}
+
+export async function deletePerformance(id: string) {
+  await sql`DELETE FROM tour_performances WHERE id = ${id}`;
+  revalidatePath('/tour/bookings');
+}
+
+const PerformanceSchema = z.object({
+  id: z.string(),
+  created_at: z.date(),
+  updated_at: z.date(),
+  date_time: z.date(),
+  show_id: z.string(),
+  presenter_id: z.string(),
+  booking_id: z.string(),
+});
+
+const UpdatePerformance = PerformanceSchema.omit({
+  id: true,
+  created_at: true,
+  updated_at: true,
+  show_id: true,
+  presenter_id: true,
+  booking_id: true,
+});
+
+export async function updatePerformance(id: string, formData: FormData) {
+  const date = formData.get('date');
+  console.log('DATE', date);
+  const time = formData.get('time');
+  console.log('TIME', time);
+  const dateTimeString = `${date}T${time}:000`;
+
+  await sql`
+  UPDATE tour_performances
+  SET 
+  date_time = ${dateTimeString}
+  WHERE
+  id = ${id}
+  `;
+
+  revalidatePath('/tour/bookings');
+  redirect('/tour/bookings');
 }

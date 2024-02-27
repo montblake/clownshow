@@ -3,7 +3,7 @@
 'use server';
 
 import { sql } from '@vercel/postgres';
-import { Presenter, BookingFields, Show } from './definitions';
+import { Presenter, BookingFields, Show, Performance } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
 // PRESENTERS
@@ -89,14 +89,14 @@ export const fetchShows = async () => {
 
 export const fetchShowById = async (id: string) => {
   noStore();
-  console.log("SHOW ID", id);
+  console.log('SHOW ID', id);
   try {
     const show = await sql<Show>`
       SELECT *
       FROM tour_shows
       WHERE tour_shows.id = ${id}
     `;
-    console.log("SHOW", show);
+    console.log('SHOW', show);
     return show.rows[0];
   } catch (error) {
     console.error('Database Error:', error);
@@ -128,11 +128,11 @@ export const fetchFilteredBookings = async (
         tpr.name AS presenter_name,
         tpr.location AS presenter_location,
         tpr.contact_name AS presenter_contact,
-        array_agg(tp.date_time) AS performances
+        json_agg(json_build_object('id', tp.id, 'date_time', tp.date_time)) AS performances
       FROM tour_bookings tb
       JOIN tour_presenters tpr ON tb.presenter_id=tpr.id
       JOIN tour_shows ts ON tb.show_id=ts.id
-      LEFT JOIN tour_performances tp ON tp.booking_id=tb.id 
+      LEFT JOIN tour_performances tp ON tp.booking_id=tb.id
       WHERE
         tb.payment_status ILIKE ${`%${query}%`} OR
         show_title ILIKE ${`%${query}%`} OR
@@ -140,7 +140,7 @@ export const fetchFilteredBookings = async (
         tpr.location ILIKE ${`%${query}%`} OR
         tpr.contact_name ILIKE ${`%${query}%`}
       GROUP BY tb.id, ts.id, ts.show_title, tpr.id, tpr.name, tpr.location, tpr.contact_name
-      ORDER BY tb.id
+      ORDER BY tpr.name
       LIMIT ${BOOKINGS_PER_PAGE} OFFSET ${offset}
     `;
     const filteredBookings = data.rows;
@@ -152,6 +152,7 @@ export const fetchFilteredBookings = async (
     throw new Error('Failed to fetch bookings data.');
   }
 };
+
 
 export const fetchBookingsPages = async (query: string) => {
   noStore();
@@ -170,7 +171,7 @@ export const fetchBookingsPages = async (query: string) => {
           tpr.name ILIKE ${`%${query}%`} OR
           tpr.location ILIKE ${`%${query}%`} OR
           tpr.contact_name ILIKE ${`%${query}%`}
-        GROUP BY tb.id, ts.show_title, tpr.name, tpr.location, tpr.contact_name
+  
       )
       SELECT COUNT(*) AS total_bookings
       FROM FilteredBookings;
@@ -218,7 +219,7 @@ export const fetchBookingById = async (id: string) => {
       tpr.name AS presenter_name,
       tpr.location AS presenter_location,
       tpr.contact_name AS presenter_contact,
-      array_agg(tp.date_time) AS performances
+      array_agg(tp.id) AS performances
     FROM tour_bookings tb
     JOIN tour_presenters tpr ON tb.presenter_id=tpr.id
     JOIN tour_shows ts ON tb.show_id=ts.id
@@ -231,5 +232,23 @@ export const fetchBookingById = async (id: string) => {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error(`Failed to fetch booking with ID: ${id}`);
+  }
+};
+
+export const fetchPerformancesByBookingId = async (id: string) => {
+  noStore();
+  try {
+    const performances = await sql<Performance>`
+    SELECT
+      tp.id,
+      tp.date_time
+    FROM tour_performances tp
+    JOIN tour_bookings tb ON tp.booking_id=tb.id
+    WHERE tb.id = ${id}
+    `;
+    return performances.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch performances by IDs.');
   }
 };
