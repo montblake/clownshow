@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { deleteBooking, deletePerformance, deletePresenter, deleteShow } from '@/lib/actions';
 
-export function ConfirmDeleteModal({  
+export default function ConfirmDeleteModal({  
   resourceId, 
   resourceType 
 }: { 

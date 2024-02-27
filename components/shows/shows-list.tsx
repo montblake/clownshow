@@ -1,6 +1,7 @@
 import { fetchShows } from '@/lib/data';
 import { Show } from '@/lib/definitions';
-import { UpdateShow, DeleteShow } from '@/components/shows/buttons';
+import { UpdateShow } from '@/components/shows/buttons';
+import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 
 export default async function ShowsList() {
   const shows: Show[] = await fetchShows();
@@ -14,7 +15,10 @@ export default async function ShowsList() {
         >
           <div className="mb-2 flex">
             <UpdateShow id={show.id} />
-            <DeleteShow id={show.id} />
+            <ConfirmDeleteModal
+              resourceType="show"
+              resourceId={show.id}
+            />
           </div>
           <div className="mb-2">
             <p className="">SHOW ID: {show.id}</p>

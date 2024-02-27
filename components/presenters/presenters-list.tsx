@@ -1,8 +1,6 @@
 import { fetchFilteredPresenters } from '@/lib/data';
-import {
-  EditPresenter,
-  DeletePresenter,
-} from '@/components/presenters/buttons';
+import { EditPresenter } from '@/components/presenters/buttons';
+import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 
 export default async function PresentersList({
   query,
@@ -21,7 +19,10 @@ export default async function PresentersList({
         >
           <div className="mb-2 flex">
             <EditPresenter id={p.id} />
-            <DeletePresenter id={p.id} />
+            <ConfirmDeleteModal
+              resourceType="presenter"
+              resourceId={p.id}
+            />
           </div>
           <div className="mb-2">
             <h3 className="text-2xl font-bold">{p.name}</h3>

@@ -1,7 +1,7 @@
 import { fetchFilteredBookings } from '@/lib/data';
 import { UpdateBooking } from '@/components/bookings/buttons';
 import Performances from '@/components/bookings/performances';
-import { ConfirmDeleteModal } from './confirm-delete-modal';
+import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 
 export default async function BookingsList({
   query,
