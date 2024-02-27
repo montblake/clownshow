@@ -1,4 +1,3 @@
-
 import Performances from './performances';
 import { UpdateBooking, DeleteBooking } from './buttons';
 import { fetchBookingById } from '@/lib/data';
@@ -12,10 +11,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { deleteBooking} from '@/lib/actions';
+import { deleteBooking } from '@/lib/actions';
 
 export default async function Booking({
   bookingId,
@@ -36,7 +35,7 @@ export default async function Booking({
         <div className="mb-2 flex">
           <UpdateBooking id={b.id} />
           <DeleteBooking id={b.id} />
-{/*           
+          {/*           
           <AlertDialog >
       <AlertDialogTrigger asChild>
         <Button variant="outline" size="icon">

@@ -11,7 +11,7 @@ import {
 } from '@heroicons/react/24/outline';
 import CreatePerformances from './create-performances';
 
-export default function Form({
+export default function CreateBookingsForm({
   presenters,
   shows,
 }: {

@@ -19,7 +19,7 @@ export function UpdateShow({ id }: { id: string }) {
     <Button variant="outline" size="icon" asChild>
       <Link href={`/tour/shows/${id}/edit`}>
         <span className="sr-only">Edit Show</span>
-        <PencilIcon className="w-4 h-4" />
+        <PencilIcon className="h-4 w-4" />
       </Link>
     </Button>
   );
@@ -32,7 +32,7 @@ export function DeleteShow({ id }: { id: string }) {
     <form action={deleteShowWithId}>
       <Button variant="outline" size="icon">
         <span className="sr-only">Delete</span>
-        <TrashIcon className="w-4 h-4" />
+        <TrashIcon className="h-4 w-4" />
       </Button>
     </form>
   );

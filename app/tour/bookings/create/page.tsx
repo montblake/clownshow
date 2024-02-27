@@ -1,4 +1,4 @@
-import Form from '@/components/bookings/create-form';
+import CreateBookingsForm from '@/components/bookings/create-bookings-form';
 import Breadcrumbs from '@/components/breadcrumbs';
 import { fetchBookingOptions } from '@/lib/data';
 
@@ -17,7 +17,7 @@ export default async function Page() {
           },
         ]}
       />
-      <Form presenters={presenters} shows={shows} />
+      <CreateBookingsForm presenters={presenters} shows={shows} />
     </main>
   );
 }

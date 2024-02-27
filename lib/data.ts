@@ -153,7 +153,6 @@ export const fetchFilteredBookings = async (
   }
 };
 
-
 export const fetchBookingsPages = async (query: string) => {
   noStore();
   try {
