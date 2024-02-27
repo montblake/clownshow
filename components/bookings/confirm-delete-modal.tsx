@@ -48,7 +48,7 @@ export function ConfirmDeleteModal({
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete this resource from the database.
+            This action cannot be undone and will permanently delete this resource from the database.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
