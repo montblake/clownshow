@@ -12,13 +12,29 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { PlusIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
-import { deleteBooking } from '@/lib/actions';
+import { TrashIcon } from '@heroicons/react/24/outline';
+import { deleteBooking, deletePerformance, deletePresenter, deleteShow } from '@/lib/actions';
 
-export function ConfirmationModal({ bookingId }: { bookingId: string }) {
+export function ConfirmDeleteModal({  
+  resourceId, 
+  resourceType 
+}: { 
+  resourceId: string, 
+  resourceType: string 
+}) {
+
   const handleDelete = () => {
-    const deleteBookingWithId = deleteBooking.bind(null, bookingId);
-    deleteBookingWithId();
+    const actions = {
+      booking: deleteBooking,
+      performance: deletePerformance,
+      presenter: deletePresenter,
+      show: deleteShow,
+    };
+  
+    const action = actions[resourceType as keyof typeof actions];
+    if (action) {
+      action(resourceId);
+    }
   };
 
   return (

@@ -1,7 +1,7 @@
 import { fetchFilteredBookings } from '@/lib/data';
 import { UpdateBooking } from '@/components/bookings/buttons';
 import Performances from '@/components/bookings/performances';
-import { ConfirmationModal } from './confirmation-modal';
+import { ConfirmDeleteModal } from './confirm-delete-modal';
 
 export default async function BookingsList({
   query,
@@ -21,7 +21,7 @@ export default async function BookingsList({
         >
           
           <div className="mb-2 flex">
-            <ConfirmationModal bookingId={b.id} />
+            <ConfirmDeleteModal resourceId={b.id} resourceType="booking"/>
             <UpdateBooking id={b.id} />
           </div>
           <div className="mb-2">
