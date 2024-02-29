@@ -5,26 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
-
 export default function Form({ presenter }: { presenter: PresenterFields }) {
   const updatePresenterWithId = updatePresenter.bind(null, presenter.id);
 
   return (
-    <form 
-      action={updatePresenterWithId} 
-      className="w-full md:max-w-[600px]"
-    >
+    <form action={updatePresenterWithId} className="w-full md:max-w-[600px]">
       <div className="grid w-full gap-4">
         {/* Presenter Name */}
         <div className="grid w-full gap-1.5">
           <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Enter venue name"
-              defaultValue={presenter.name}
-            />
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Enter venue name"
+            defaultValue={presenter.name}
+          />
         </div>
         {/* Presenter Location */}
         <div className="grid w-full gap-1.5">

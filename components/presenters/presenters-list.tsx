@@ -5,7 +5,7 @@ import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 import {
   Card,
   CardContent,
-  CardDescription,  
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -18,7 +18,10 @@ export default async function PresentersList({
   query: string;
   currentPage: number;
 }) {
-  const presenters: PresenterFields[] = await fetchFilteredPresenters(query, currentPage);
+  const presenters: PresenterFields[] = await fetchFilteredPresenters(
+    query,
+    currentPage,
+  );
 
   return (
     <ul className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
@@ -29,7 +32,7 @@ export default async function PresentersList({
             <CardDescription>{p.location}</CardDescription>
           </CardHeader>
           <CardContent>
-          <h4 className="text-sm italic">Contact</h4>
+            <h4 className="text-sm italic">Contact</h4>
             <p className="mb-2">{p.contact_name}</p>
             <h4 className="text-sm italic">Email</h4>
             <p className="mb-2">{p.contact_email}</p>

@@ -11,12 +11,12 @@ export default function Form() {
         {/* Presenter Name */}
         <div className="grid w-full gap-1.5">
           <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Enter venue name"
-            />
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Enter venue name"
+          />
         </div>
         {/* Presenter Location */}
         <div className="grid w-full gap-1.5">
