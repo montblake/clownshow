@@ -135,12 +135,6 @@ export async function deleteShow(id: string) {
   revalidatePath('/tour/shows');
 }
 
-const UpdateShow = ShowFormSchema.omit({
-  id: true,
-  created_at: true,
-  updated_at: true,
-});
-
 export async function updateShow(id: string, formData: FormData) {
   const {
     show_title,
@@ -159,7 +153,7 @@ export async function updateShow(id: string, formData: FormData) {
     long_description: formData.get('long_description') || '',
   });
 
-  await sql`
+  await sql<ShowFields>`
     UPDATE tour_shows
     SET 
     show_title = ${show_title}, 
@@ -283,25 +277,6 @@ export async function deletePerformance(id: string) {
   await sql`DELETE FROM tour_performances WHERE id = ${id}`;
   revalidatePath('/tour/bookings');
 }
-
-const PerformanceSchema = z.object({
-  id: z.string(),
-  created_at: z.date(),
-  updated_at: z.date(),
-  date_time: z.date(),
-  show_id: z.string(),
-  presenter_id: z.string(),
-  booking_id: z.string(),
-});
-
-const UpdatePerformance = PerformanceSchema.omit({
-  id: true,
-  created_at: true,
-  updated_at: true,
-  show_id: true,
-  presenter_id: true,
-  booking_id: true,
-});
 
 export async function updatePerformance(id: string, formData: FormData) {
   const date = formData.get('date');
