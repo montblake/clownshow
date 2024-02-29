@@ -17,7 +17,7 @@ export default function Form() {
             name="show_title"
             type="text"
             placeholder="Enter show title"
-            />
+          />
         </div>
         {/* Short Description */}
         <div className="grid w-full gap-1.5">
@@ -26,7 +26,7 @@ export default function Form() {
             placeholder="Enter description (255 characters max)."
             id="short_description"
             name="short_description"
-            />
+          />
         </div>
         {/* Running Time */}
         <div className="grid w-full gap-1.5">
@@ -36,7 +36,7 @@ export default function Form() {
             name="running_time_in_minutes"
             type="number"
             placeholder="Enter running time in minutes"
-            />
+          />
         </div>
         {/* Number of Intermissions */}
         <div className="grid w-full gap-1.5">

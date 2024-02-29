@@ -21,8 +21,8 @@ export function ModeToggle() {
           variant="outline"
           className="flex h-[48px] grow items-center justify-center gap-2 rounded-xl bg-background p-3 text-sm font-medium drop-shadow hover:bg-brand-light hover:text-brand lg:justify-start lg:px-3 lg:py-0"
         >
-          <SunIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 dark:hidden" />
-          <MoonIcon className="h-6 w-6 hidden rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 dark:block" />
+          <SunIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:hidden dark:-rotate-90 dark:scale-0" />
+          <MoonIcon className="hidden h-6 w-6 rotate-90 scale-0 transition-all dark:block dark:rotate-0 dark:scale-100" />
           <span className="hidden sm:block">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
