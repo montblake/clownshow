@@ -19,7 +19,7 @@ export default function SideNav() {
           <ModeToggle />
           <Button
             variant="outline"
-            className="flex h-[48px] grow items-center justify-center gap-2 rounded-xl bg-background p-3 text-sm font-medium drop-shadow hover:bg-brand-light hover:text-brand lg:justify-start lg:px-3 lg:py-0"
+            className="flex h-[48px] grow items-center justify-center gap-2 rounded-xl bg-background p-3 text-sm font-medium drop-shadow hover:bg-brand-light text-brand hover:text-brand lg:justify-start lg:px-3 lg:py-0"
           >
             <PowerIcon className="w-6" />
             <p className="hidden sm:block">Sign Out</p>
