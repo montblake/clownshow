@@ -66,20 +66,26 @@ export const fetchFilteredPresenters = async (
   }
 };
 
-// export const fetchPresenterById = async (id: string) => {
-//   noStore();
-//   try {
-//     const presenter = await sql<Presenter>`
-//       SELECT *
-//       FROM tour_presenters
-//       WHERE tour_presenters.id = ${id}
-//     `;
-//     return presenter.rows[0];
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error(`Failed to fetch presenter by ID: ${id}`);
-//   }
-// };
+export const fetchPresenterById = async (id: string) => {
+  noStore();
+  try {
+    const presenter = await sql<PresenterFields>`
+      SELECT
+        tpr.id,
+        tpr.name,
+        tpr.location,
+        tpr.contact_name,
+        tpr.contact_email,
+        tpr.contact_phone  
+      FROM tour_presenters tpr
+      WHERE tpr.id = ${id}
+    `;
+    return presenter.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to fetch presenter by ID: ${id}`);
+  }
+};
 
 // SHOWS
 export const fetchShows = async () => {
