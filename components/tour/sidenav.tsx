@@ -15,7 +15,7 @@ export default function SideNav() {
       </Link>
       <div className="m-1 flex grow flex-col justify-between gap-2">
         <NavLinks />
-        <div className="mb-0 flex gap-2 lg:mb-2 lg:flex-col lg:gap-0">
+        <div className="mb-0 flex gap-2 lg:mb-2 lg:flex-col">
           <ModeToggle />
           <Button
             variant="outline"
