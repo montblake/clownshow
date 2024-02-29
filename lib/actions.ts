@@ -88,6 +88,8 @@ export async function updatePresenter(id: string, formData: FormData) {
 const ShowFormSchema = z.object({
   id: z.string(),
   show_title: z.string(),
+  short_description: z.string(),
+  long_description: z.string(),
   running_time_in_minutes: z.number(),
   num_intermissions: z.number(),
   cast_size: z.number(),
@@ -102,18 +104,26 @@ const CreateShow = ShowFormSchema.omit({
 });
 FormData;
 export async function createShow(formData: FormData) {
-  const { show_title, running_time_in_minutes, num_intermissions, cast_size } =
-    CreateShow.parse({
-      show_title: formData.get('show_title'),
-      running_time_in_minutes:
-        Number(formData.get('running_time_in_minutes')) || 0,
-      num_intermissions: Number(formData.get('num_intermissions')) || 0,
-      cast_size: Number(formData.get('cast_size')) || 1,
-    });
+  const {
+    show_title,
+    running_time_in_minutes,
+    num_intermissions,
+    cast_size,
+    short_description,
+    long_description,
+  } = CreateShow.parse({
+    show_title: formData.get('show_title'),
+    running_time_in_minutes:
+      Number(formData.get('running_time_in_minutes')) || 0,
+    num_intermissions: Number(formData.get('num_intermissions')) || 0,
+    cast_size: Number(formData.get('cast_size')) || 1,
+    short_description: formData.get('short_description') || '',
+    long_description: formData.get('long_description') || '',
+  });
 
   await sql`
-    INSERT INTO tour_shows ( show_title, running_time_in_minutes, num_intermissions, cast_size )
-    VALUES (${show_title}, ${running_time_in_minutes}, ${num_intermissions}, ${cast_size} )
+    INSERT INTO tour_shows ( show_title, running_time_in_minutes, num_intermissions, cast_size, short_description, long_description )
+    VALUES (${show_title}, ${running_time_in_minutes}, ${num_intermissions}, ${cast_size}, ${short_description}, ${long_description} )
     `;
 
   revalidatePath('/tour/shows');
@@ -132,20 +142,32 @@ const UpdateShow = ShowFormSchema.omit({
 });
 
 export async function updateShow(id: string, formData: FormData) {
-  const { show_title, running_time_in_minutes, num_intermissions, cast_size } =
-    UpdateShow.parse({
-      show_title: formData.get('show_title'),
-      running_time_in_minutes: Number(formData.get('running_time_in_minutes')),
-      num_intermissions: Number(formData.get('num_intermissions')),
-      cast_size: Number(formData.get('cast_size')),
-    });
+  const {
+    show_title,
+    running_time_in_minutes,
+    num_intermissions,
+    cast_size,
+    short_description,
+    long_description,
+  } = CreateShow.parse({
+    show_title: formData.get('show_title'),
+    running_time_in_minutes:
+      Number(formData.get('running_time_in_minutes')) || 0,
+    num_intermissions: Number(formData.get('num_intermissions')) || 0,
+    cast_size: Number(formData.get('cast_size')) || 1,
+    short_description: formData.get('short_description') || '',
+    long_description: formData.get('long_description') || '',
+  });
 
   await sql`
     UPDATE tour_shows
     SET 
-    show_title = ${show_title}, running_time_in_minutes = ${running_time_in_minutes},
+    show_title = ${show_title}, 
+    running_time_in_minutes = ${running_time_in_minutes},
     num_intermissions = ${num_intermissions},
-    cast_size = ${cast_size}
+    cast_size = ${cast_size},
+    short_description = ${short_description},
+    long_description = ${long_description}
     WHERE
     id = ${id}
     `;

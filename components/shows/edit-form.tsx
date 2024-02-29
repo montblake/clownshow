@@ -1,90 +1,82 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { updateShow } from '@/lib/actions';
 import { ShowFields } from '@/lib/definitions';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function Form({ show }: { show: ShowFields }) {
   const updateShowWithId = updateShow.bind(null, show.id);
   return (
-    <form action={updateShowWithId}>
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
+    <form action={updateShowWithId} className="w-full md:max-w-[600px]">
+      <div className="grid w-full gap-4">
         {/* Show Title */}
-        <div className="mb-4">
-          <label
-            htmlFor="show_title"
-            className="mb-2 block text-sm font-medium"
-          >
-            Title
-          </label>
-          <div className="relative mt-2 rounded-md">
-            <input
-              id="show_title"
-              name="show_title"
-              type="text"
-              placeholder="Enter show title"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={show.show_title}
-            />
-          </div>
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor="show_title">Title</Label>
+          <Input
+            id="show_title"
+            name="show_title"
+            type="text"
+            placeholder="Enter show title"
+            defaultValue={show.show_title}
+          />
         </div>
-
-        {/* Show Running Time */}
-        <div className="mb-4">
-          <label
-            htmlFor="running_time_in_minutes"
-            className="mb-2 block text-sm font-medium"
-          >
-            Running Time
-          </label>
-          <div className="relative mt-2 rounded-md">
-            <input
-              id="running_time_in_minutes"
-              name="running_time_in_minutes"
-              type="number"
-              placeholder="Enter running time in minutes"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={show.running_time_in_minutes}
-            />
-          </div>
+        {/* Short Description */}
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor="short_description">Short Description</Label>
+          <Textarea
+            placeholder="Enter description (255 characters max)."
+            id="short_description"
+            name="short_description"
+            defaultValue={show.short_description}
+          />
         </div>
-
+        {/* Running Time */}
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor="running_time_in_minutes">Running Time</Label>
+          <Input
+            id="running_time_in_minutes"
+            name="running_time_in_minutes"
+            type="number"
+            placeholder="Enter running time in minutes"
+            defaultValue={show.running_time_in_minutes}
+          />
+        </div>
         {/* Number of Intermissions */}
-        <div className="mb-4">
-          <label
-            htmlFor="num_intermissions"
-            className="mb-2 block text-sm font-medium"
-          >
-            Number of Intermissions
-          </label>
-          <div className="relative mt-2 rounded-md">
-            <input
-              id="num_intermissions"
-              name="num_intermissions"
-              type="number"
-              placeholder="Enter an integer"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={show.num_intermissions}
-            />
-          </div>
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor="num_intermissions">Number of Intermissions</Label>
+          <Input
+            id="num_intermissions"
+            name="num_intermissions"
+            type="number"
+            placeholder="Enter an integer"
+            defaultValue={show.num_intermissions}
+          />
         </div>
-
         {/* Cast Size */}
-        <div className="mb-4">
-          <label htmlFor="cast_size" className="mb-2 block text-sm font-medium">
-            Cast Size
-          </label>
-          <div className="relative mt-2 rounded-md">
-            <input
-              id="cast_size"
-              name="cast_size"
-              type="number"
-              placeholder="Enter an integer"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={show.cast_size}
-            />
-          </div>
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor="cast_size">Cast Size</Label>
+          <Input
+            id="cast_size"
+            name="cast_size"
+            type="number"
+            placeholder="Enter an integer"
+            defaultValue={show.cast_size}
+          />
+        </div>
+        {/* Full Description */}
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor="long_description">Full Description</Label>
+          <Textarea
+            placeholder="Enter description."
+            id="long_description"
+            name="long_description"
+            defaultValue={show.long_description}
+          />
         </div>
       </div>
+      {/* Buttons */}
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/tour/shows"

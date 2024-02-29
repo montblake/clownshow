@@ -13,16 +13,20 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { deleteBooking, deletePerformance, deletePresenter, deleteShow } from '@/lib/actions';
+import {
+  deleteBooking,
+  deletePerformance,
+  deletePresenter,
+  deleteShow,
+} from '@/lib/actions';
 
-export default function ConfirmDeleteModal({  
-  resourceId, 
-  resourceType 
-}: { 
-  resourceId: string, 
-  resourceType: string 
+export default function ConfirmDeleteModal({
+  resourceId,
+  resourceType,
+}: {
+  resourceId: string;
+  resourceType: string;
 }) {
-
   const handleDelete = () => {
     const actions = {
       booking: deleteBooking,
@@ -30,7 +34,7 @@ export default function ConfirmDeleteModal({
       presenter: deletePresenter,
       show: deleteShow,
     };
-  
+
     const action = actions[resourceType as keyof typeof actions];
     if (action) {
       action(resourceId);
@@ -48,7 +52,8 @@ export default function ConfirmDeleteModal({
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone and will permanently delete this resource from the database.
+            This action cannot be undone and will permanently delete this
+            resource from the database.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

@@ -3,7 +3,12 @@
 'use server';
 
 import { sql } from '@vercel/postgres';
-import { Presenter, BookingFields, Show, Performance } from './definitions';
+import {
+  PresenterFields,
+  BookingFields,
+  ShowFields,
+  Performance,
+} from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
 // PRESENTERS
@@ -38,8 +43,14 @@ export const fetchFilteredPresenters = async (
   const offset = (currentPage - 1) * PRESENTERS_PER_PAGE;
   noStore();
   try {
-    const presenters = await sql<Presenter>`
-      SELECT *
+    const presenters = await sql<PresenterFields>`
+      SELECT
+        tpr.id,
+        tpr.name,
+        tpr.location,
+        tpr.contact_name,
+        tpr.contact_email,
+        tpr.contact_phone      
       FROM tour_presenters tpr
       WHERE
         tpr.name ILIKE ${`%${query}%`} OR
@@ -55,31 +66,38 @@ export const fetchFilteredPresenters = async (
   }
 };
 
-export const fetchPresenterById = async (id: string) => {
-  noStore();
-  try {
-    const presenter = await sql<Presenter>`
-      SELECT *
-      FROM tour_presenters
-      WHERE tour_presenters.id = ${id}
-    `;
-    return presenter.rows[0];
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error(`Failed to fetch presenter by ID: ${id}`);
-  }
-};
+// export const fetchPresenterById = async (id: string) => {
+//   noStore();
+//   try {
+//     const presenter = await sql<Presenter>`
+//       SELECT *
+//       FROM tour_presenters
+//       WHERE tour_presenters.id = ${id}
+//     `;
+//     return presenter.rows[0];
+//   } catch (error) {
+//     console.error('Database Error:', error);
+//     throw new Error(`Failed to fetch presenter by ID: ${id}`);
+//   }
+// };
 
 // SHOWS
 export const fetchShows = async () => {
   noStore();
   try {
-    const shows = await sql<Show>`
-      SELECT *
-      FROM tour_shows
-      ORDER BY tour_shows.show_title
-    `;
-
+    const shows = await sql<ShowFields>`
+      SELECT
+            ts.id,
+            ts.show_title,
+            ts.short_description,
+            ts.running_time_in_minutes,
+            ts.num_intermissions,
+            ts.cast_size,
+            ts.long_description
+          FROM tour_shows ts
+          ORDER BY ts.show_title
+        `;
+    console.log('SHOWS:', shows.rows[0].long_description);
     return shows.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -91,12 +109,18 @@ export const fetchShowById = async (id: string) => {
   noStore();
   console.log('SHOW ID', id);
   try {
-    const show = await sql<Show>`
-      SELECT *
-      FROM tour_shows
-      WHERE tour_shows.id = ${id}
+    const show = await sql<ShowFields>`
+      SELECT
+        ts.id,
+        ts.show_title,
+        ts.short_description,
+        ts.running_time_in_minutes,
+        ts.num_intermissions,
+        ts.cast_size,
+        ts.long_description
+      FROM tour_shows ts
+      WHERE ts.id = ${id}
     `;
-    console.log('SHOW', show);
     return show.rows[0];
   } catch (error) {
     console.error('Database Error:', error);

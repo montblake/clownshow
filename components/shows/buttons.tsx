@@ -14,7 +14,7 @@ export function CreateShow() {
   );
 }
 
-export function UpdateShow({ id }: { id: string }) {
+export function EditShow({ id }: { id: string }) {
   return (
     <Button variant="outline" size="icon" asChild>
       <Link href={`/tour/shows/${id}/edit`}>

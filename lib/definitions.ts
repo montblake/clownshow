@@ -12,6 +12,8 @@ export type User = {
 export type Show = {
   id: string;
   show_title: string;
+  short_description: string;
+  long_description: string;
   running_time_in_minutes: number;
   num_intermissions: number;
   cast_size: number;
@@ -22,6 +24,8 @@ export type Show = {
 export type ShowFields = {
   id: string;
   show_title: string;
+  short_description: string;
+  long_description: string;
   running_time_in_minutes: number;
   num_intermissions: number;
   cast_size: number;

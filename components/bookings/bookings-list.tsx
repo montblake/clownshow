@@ -19,9 +19,8 @@ export default async function BookingsList({
           key={b.id}
           className="flex flex-col items-start justify-center rounded-lg bg-slate-50 p-4 text-xl text-slate-800 drop-shadow"
         >
-          
           <div className="mb-2 flex">
-            <ConfirmDeleteModal resourceId={b.id} resourceType="booking"/>
+            <ConfirmDeleteModal resourceId={b.id} resourceType="booking" />
             <UpdateBooking id={b.id} />
           </div>
           <div className="mb-2">
