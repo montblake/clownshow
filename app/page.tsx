@@ -2,100 +2,85 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main className="h-screen w-full bg-white bg-bottom bg-no-repeat bg-cover p-4">
+      <header className=" p-4 flex flex-col items-start justify-start gap-0 p-16 sm:p-24 md:p-36 lg:p-48 w-full">
+        <h1 className="font-heading font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-tighter text-neutral-800  drop-shadow-2xl mb-4">
+          <span className="text-red-600">clownshow</span> is a creative
+          production company specializing in the development of original live
+          theater, immersive events, and boundary-pushing experiences. Founded
+          by Blake Montgomery, whose background in directing clown theater
+          shapes the heart of our artistic vision, Clownshow is about more than
+          just creating performances—it&apos;s about discovering the essence of
+          each project and building worlds that engage and surprise audiences.
+        </h1>
+        <h1 className="font-heading font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-tighter text-neutral-800  mb-4">
+          The name reflects our belief that every production needs something
+          inherently &quot;clown&quot;—not in the traditional sense of red noses
+          or big shoes, but in the deeper art of play, vulnerability, and
+          unexpected transformation. We embrace the chaos and imperfection of
+          live theater, knowing that, as in life, things often go wrong. Our
+          mission is to turn these moments into a beautiful dance of linked
+          recoveries, where spontaneity and resilience shine.
+        </h1>
+        <h1 className="font-heading font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-tighter text-neutral-800  drop-shadow-lg mb-4">
+          We invite audiences to step into our uniquely crafted experiences,
+          where the unexpected is celebrated, and the essence of storytelling
+          takes center stage.
+        </h1>
+        <a href="https://www.begrudginglydickens.com" target="_blank">
+          <div className="flex flex-col items-center justify-center gap-4 mb-24 w-full bg-red-600 p-8 rounded-lg my-8 hover:border-neutral-800 border-4 border-red-600">
+            {/* <h1 className="font-heading font-bold text-base sm:text-lg md:text-xl lg:text-2xl tracking-tighter text-white w-full text-center ">
+              CHARLES DICKENS
+              <br />
+              BEGRUDGINGLY PERFORMS
+              <br />
+              &lsquo;A CHRISTMAS CAROL&rsquo;
+              <br />
+              AGAIN
+            </h1> */}
+            <hr className="h-[1px] w-full my-0 bg-white border-0" />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+            <p className="text-white text-sm sm:text-sm md:text-base lg:text-lg">
+              Our inaugural production, Blake Montgomery&apos;s Jeff
+              Award-winning holiday solo show, will be performed at{" "}
+              <span className="font-bold">The Den Theatre</span> in Chicago,
+              December 5 – 22, 2024.
+            </p>
+            <hr className="h-[1px] w-full my-0 bg-white border-0 mb-4" />
             <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/dickens_publicity_2024.png"
+              alt="Dickens Show Publicity Image"
+              width={800}
+              height={800}
+              className="rounded-lg border border-white"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+        </a>
+      </header>
+      {/* <section className=" w-full bg-neutral-900 p-8 rounded-lg">
+        <Image
+          src="/dickens_publicity_2024.png"
+          alt="Dickens Show Publicity Image"
+          width={800}
+          height={800}
+          className="rounded-lg border border-neutral-400"
+        />
+        <div className="flex flex-col items-center justify-center gap-4 mb-24">
+          <p className="font-header font-light text-lg sm:text-xl md:text-2xl lg:text-3xl text-neutral-200  drop-shadow-2xl py-4">
+            Our inaugural show will be performed at{" "}
+            <span className="font-bold">The Den Theatre</span> in Chicago from
+            December 5 to December 22, 2024.
+          </p>
+          <button className="bg-neutral-200 text-neutral-900 p-2 rounded-lg">
+            Explore the Show
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section> */}
+      <footer className="text-center fixed bg-white bottom-0 w-full p-8">
+        <p className="text-neutral-600 text-sm">
+          © 2024 CLOWNSHOW LLC. All rights reserved.
+        </p>
       </footer>
-    </div>
+    </main>
   );
 }

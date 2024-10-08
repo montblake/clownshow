@@ -1,0 +1,14 @@
+{
+  "name": "clownshow",
+  "short_name": "clownshow",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "32x32 192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#8B0000",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

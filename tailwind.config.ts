@@ -8,9 +8,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        quixote: "url('/quixote.jpg')",
+        clownshow: "url('/curtains.png')",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      fontFamily: {
+        serif: ["var(--font-libre-baskerville)"],
+        heading: ["var(--font-inter)"],
+        specialElite: ["var(--font-special-elite)"],
       },
     },
   },
