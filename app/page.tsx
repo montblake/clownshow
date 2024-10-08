@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="h-screen w-full bg-white bg-bottom bg-no-repeat bg-cover p-4">
-      <header className=" p-4 flex flex-col items-start justify-start gap-0 p-16 sm:p-24 md:p-36 lg:p-48 w-full">
+    <main className="h-screen max-w-[1200px] mx-auto bg-white bg-bottom bg-no-repeat bg-cover p-4">
+      <header className=" px-16 pt-16 pb-8 flex flex-col items-start justify-start gap-0 sm:px-24 sm:pt-24 sm:pb-8 md:px-36 md:pt-24 md:pb-8 lg:px-48 lg:pt-24 lg:pb-8 w-full">
         <h1 className="font-heading font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-tighter text-neutral-800  drop-shadow-2xl mb-4">
           <span className="text-red-600">clownshow</span> is a creative
           production company specializing in the development of original live
@@ -27,17 +27,10 @@ export default function Home() {
           where the unexpected is celebrated, and the essence of storytelling
           takes center stage.
         </h1>
+      </header>
+      <section className="w-full px-16 py-0 sm:px-24 md:px-36 lg:px-48 pb-24">
         <a href="https://www.begrudginglydickens.com" target="_blank">
           <div className="flex flex-col items-center justify-center gap-4 mb-24 w-full bg-red-600 p-8 rounded-lg my-8 hover:border-neutral-800 border-4 border-red-600">
-            {/* <h1 className="font-heading font-bold text-base sm:text-lg md:text-xl lg:text-2xl tracking-tighter text-white w-full text-center ">
-              CHARLES DICKENS
-              <br />
-              BEGRUDGINGLY PERFORMS
-              <br />
-              &lsquo;A CHRISTMAS CAROL&rsquo;
-              <br />
-              AGAIN
-            </h1> */}
             <hr className="h-[1px] w-full my-0 bg-white border-0" />
 
             <p className="text-white text-sm sm:text-sm md:text-base lg:text-lg">
@@ -56,26 +49,8 @@ export default function Home() {
             />
           </div>
         </a>
-      </header>
-      {/* <section className=" w-full bg-neutral-900 p-8 rounded-lg">
-        <Image
-          src="/dickens_publicity_2024.png"
-          alt="Dickens Show Publicity Image"
-          width={800}
-          height={800}
-          className="rounded-lg border border-neutral-400"
-        />
-        <div className="flex flex-col items-center justify-center gap-4 mb-24">
-          <p className="font-header font-light text-lg sm:text-xl md:text-2xl lg:text-3xl text-neutral-200  drop-shadow-2xl py-4">
-            Our inaugural show will be performed at{" "}
-            <span className="font-bold">The Den Theatre</span> in Chicago from
-            December 5 to December 22, 2024.
-          </p>
-          <button className="bg-neutral-200 text-neutral-900 p-2 rounded-lg">
-            Explore the Show
-          </button>
-        </div>
-      </section> */}
+      </section>
+
       <footer className="text-center fixed bg-white bottom-0 w-full p-8">
         <p className="text-neutral-600 text-sm">
           © 2024 CLOWNSHOW LLC. All rights reserved.
