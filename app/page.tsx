@@ -10,7 +10,7 @@ export default function Home() {
           theater, immersive events, and boundary-pushing experiences.
         </h1>
         <a
-          href="mailto:dickens@dickensagain.com"
+          href="mailto:blake@thisisaclownshow.com"
           className="bg-white hover:border-2 border-red-600 rounded-md p-2 text-red-500 text-xs aspect-square h-24 flex flex-col items-center justify-center mt-4"
         >
           <svg
