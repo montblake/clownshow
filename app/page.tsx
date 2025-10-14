@@ -21,7 +21,7 @@ export default function Home() {
             </p>
             <a
               href="mailto:blake@thisisaclownshow.com"
-              className="bg-neutral-200 rounded-xl px-8 py-2 gap-2 text-neutral-800 text-xs flex flex-col items-center justify-center text-sm text-neutral-200 uppercase"
+              className="bg-neutral-400 rounded-xl px-8 py-2 gap-2 text-neutral-800 text-xs flex flex-col items-center justify-center text-sm text-neutral-200 uppercase hover:bg-neutral-200 transition-all duration-300 active:underline"
             >
               get in touch
             </a>
@@ -54,7 +54,7 @@ export default function Home() {
                 href="https://www.theaterwit.org/tickets/productions/564/performances#top"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-neutral-200 rounded-xl px-8 py-2 gap-2 text-neutral-800 text-xs flex flex-col items-center justify-center text-sm text-neutral-200 uppercase my-8"
+                className="bg-neutral-400 rounded-xl px-8 py-2 gap-2 text-neutral-800 text-xs flex flex-col items-center justify-center text-sm text-neutral-200 uppercase hover:bg-neutral-200 transition-all duration-300 active:underline my-8"
               >
                 purchase tickets
               </a>
@@ -84,7 +84,7 @@ export default function Home() {
                 href="https://www.dickensagain.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-neutral-800 rounded-xl px-8 py-2 gap-2 text-neutral-200 text-xs flex flex-col items-center justify-center text-sm text-neutral-200 uppercase mt-8"
+                className="bg-neutral-700 rounded-xl px-8 py-2 gap-2 text-neutral-200 text-xs flex flex-col items-center justify-center text-sm text-neutral-200 uppercase mt-8 hover:bg-neutral-900 transition-all duration-300 active:underline"
               >
                 explore show
               </a>
