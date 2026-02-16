@@ -11,14 +11,14 @@ const Productions: Production[] = [
     title: "Hamlet",
     company: "The Building Stage",
     description: "Directed",
-    image: "/productions/hamlet/F93W0176.JPG",
+    image: "/productions/hamlet/F93W0176.avif",
     link: "/hamlet",
   },
   {
     title: "Dustbowl Gothic",
     company: "The Building Stage",
     description: "Conceived and Directed",
-    image: "/productions/dustbowl/IMG_3125.jpg",
+    image: "/productions/dustbowl/IMG_3125.avif",
     link: "/dustbowl",
   },
   {
@@ -32,28 +32,28 @@ const Productions: Production[] = [
     title: "Noir",
     company: "The Building Stage",
     description: "Conceived and Directed",
-    image: "/productions/noir/_DSF4162.JPG",
+    image: "/productions/noir/_DSF4162.avif",
     link: "/noir",
   },
   {
     title: "Franklin Expedition",
     company: "The Building Stage",
     description: "Conceived and Directed",
-    image: "/productions/franklin/MSB_8245.jpg",
+    image: "/productions/franklin/MSB_8245.avif",
     link: "/franklin",
   },
   {
     title: "Hansel und Gretel",
     company: "The Building Stage",
     description: "Conceived and Directed",
-    image: "/productions/hansel/_DSC9173.jpg",
+    image: "/productions/hansel/_DSC9173.avif",
     link: "/hansel",
   },
   {
     title: "Moby-Dick (2011)",
     company: "The Building Stage",
     description: "Adapted and Directed",
-    image: "/productions/moby/2011/_MSB3953.jpg",
+    image: "/productions/moby/2011/_MSB3953.avif",
     link: "/moby-2011",
   },
   {
@@ -61,7 +61,7 @@ const Productions: Production[] = [
     company: "The Building Stage",
     description: "Conceived and Directed",
     image:
-      "/productions/quixote/joe-mazza-brave-lux-chicago-da-2434516091-O.jpg",
+      "/productions/quixote/joe-mazza-brave-lux-chicago-da-2434516091-O.avif",
     link: "/quixote",
   },
   {
@@ -69,7 +69,7 @@ const Productions: Production[] = [
     company: "Clownshow",
     description: "Created and Performed",
     image:
-      "/productions/dickens/2025/joe-mazza-chicago-brave-lux-inc-5106164.jpg",
+      "/productions/dickens/2025/joe-mazza-chicago-brave-lux-inc-5106164.avif",
     link: "/dickens",
   },
 ];
