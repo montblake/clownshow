@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import Productions from "../data/productions";
+import { Production } from "../data/productions";
 
 export default function ProductionHistory() {
   return (
@@ -10,7 +12,7 @@ export default function ProductionHistory() {
         </h1>
       </div>
       <div className="w-1/2 h-full overflow-y-scroll flex flex-col items-center justify-start gap-4 bg-gradient-to-b  from-neutral-300/10 to-neutral-600/10 py-8">
-        {Productions.map((production) => (
+        {Productions.map((production: Production) => (
           <Link
             href={`/blake-montgomery/productions/${production.link}`}
             key={production.title}
