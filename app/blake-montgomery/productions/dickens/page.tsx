@@ -45,7 +45,8 @@ export default async function Dickens() {
             </p>
           </Link>
           <h1 className="text-3xl font-semibold">
-            Charles Dickens Begrudgingly Performs 'A Christmas Carol' Again
+            Charles Dickens Begrudgingly Performs &lsquo;A Christmas
+            Carol&rsquo; Again
           </h1>
           <p className="">Created and Performed by Blake Montgomery</p>
           <p className="">Directed by Jonathan Berry</p>

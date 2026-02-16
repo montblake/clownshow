@@ -50,7 +50,7 @@ export default async function Dustbowl() {
             Created and performed by Lori Myers, Leah Urzendowski, Sarah Goeden,
             Jeremy Sher, Alex Goodrich, and Chris Hibbard
           </p>
-          <p className="mt-2">Original Music by Kevin O'Donnell</p>
+          <p className="mt-2">Original Music by Kevin O&apos;Donnell</p>
           <p className="mt-2">
             After Dark Award for Outstanding Production, 2006
           </p>
