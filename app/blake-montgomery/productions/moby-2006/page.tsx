@@ -44,7 +44,13 @@ const SecondCredits = [
   "Costume Design by Meghan Raham",
   "Lighting Design by Stephanie Millar",
 ];
-const Commendations = [""];
+const Commendations = [
+  {
+    title: "",
+    author: "",
+    publication: "",
+  },
+];
 const Prev = {
   title: "Dustbowl Gothic",
   link: "/blake-montgomery/productions/dustbowl",
