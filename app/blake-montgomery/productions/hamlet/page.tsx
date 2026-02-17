@@ -28,7 +28,7 @@ async function getHamletImages() {
 
 const Title = "Hamlet";
 const Credits = ["by William Shakespeare", "Directed by Blake Montgomery"];
-const SecondCredits = [];
+const SecondCredits = [""];
 const Commendations = [
   {
     title: "Ten best Chicago plays of 2000-2009",
