@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import Image from "next/image";
-import Link from "next/link";
+import ProductionInfo from "@/components/production_info";
 
 const IMAGE_EXTENSIONS = new Set([
   ".jpg",
@@ -26,29 +26,47 @@ async function getHamletImages() {
     }));
 }
 
+const Title = "Hamlet";
+const Credits = ["by William Shakespeare", "Directed by Blake Montgomery"];
+const SecondCredits = [];
+const Commendations = [
+  {
+    title: "Ten best Chicago plays of 2000-2009",
+    author: "Kelly Kleiman",
+    publication: "WBEZ",
+    // url: "https://www.wbez.org/news/2009/12/31/kleiman-ten-best-chicago-plays-of-2000-2009",
+  },
+  {
+    title: "Best of the Fringe in 2005",
+    author: "Kerry Reid",
+    publication: "Chicago Tribune",
+    // url: "https://www.chicagotribune.com/2005/12/30/heres-the-best-of-the-fringe-in-2005/",
+  },
+];
+const Prev = {
+  title: "Charles Dickens Begrudgingly",
+  link: "/blake-montgomery/productions/dickens",
+};
+const Next = {
+  title: "Dustbowl Gothic",
+  link: "/blake-montgomery/productions/dustbowl",
+};
+
 export default async function Hamlet() {
   const images = await getHamletImages();
 
   return (
     <main className="flex flex-row items-start justify-center w-full h-[calc(100vh-6rem)] bg-gradient-to-b from-neutral-800 to-neutral-950 px-12 py-0 overflow-hidden text-neutral-400">
       <div className="flex flex-row items-start justify-center w-full px-6 py-0 h-full">
-        <div className="flex flex-col items-start justify-start gap-2 w-1/2 p-8">
-          <Link href="/blake-montgomery/productions">
-            <p className="text-sm text-neutral-400 mb-8">
-              &larr; Back to Production History
-            </p>
-          </Link>
-          <h1 className="text-3xl font-semibold">Hamlet</h1>
-          <p>by William Shakespeare</p>
-          <p className="">Directed by Blake Montgomery</p>
-          <p className="">Photos by Sean Williams</p>
+        <ProductionInfo
+          title={Title}
+          credits={Credits}
+          secondCredits={SecondCredits}
+          commendations={Commendations}
+          prev={Prev}
+          next={Next}
+        />
 
-          <Link href="/blake-montgomery/productions/dustbowl">
-            <p className="text-sm text-neutral-400 mb-8">
-              Dustbowl Gothic &rarr;
-            </p>
-          </Link>
-        </div>
         <div className="w-1/2 h-full overflow-y-scroll flex flex-col items-center justify-start gap-4 bg-gradient-to-b  from-neutral-300/10 to-neutral-600/10 px-8 pt-8 pb-16">
           {images.length === 0 ? (
             <p className="mt-8 text-sm text-neutral-400">
@@ -56,6 +74,9 @@ export default async function Hamlet() {
             </p>
           ) : (
             <div className="flex flex-col items-center justify-center gap-8">
+              <p className="mt-0 text-sm text-neutral-400">
+                Photos by Sean Williams
+              </p>
               {images.map((image) => (
                 <Image
                   key={image.src}

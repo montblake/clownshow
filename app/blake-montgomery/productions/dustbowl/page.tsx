@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import Image from "next/image";
-import Link from "next/link";
+import ProductionInfo from "@/components/production_info";
 
 const IMAGE_EXTENSIONS = new Set([
   ".jpg",
@@ -31,38 +31,53 @@ async function getDustbowlImages() {
     }));
 }
 
+const Title = "Dustbowl Gothic";
+const Credits = [
+  "Inspired by the painting by Grant Wood",
+  "Conceived and Directed by Blake Montgomery",
+  "Created and performed by Lori Myers, Leah Urzendowski, Sarah Goeden, Jeremy Sher, Alex Goodrich, and Chris Hibbard",
+];
+const SecondCredits = [
+  "Original Music by Kevin O'Donnell",
+  "Lighting Design by Michael Mahlum",
+  "Scenic Design by Tracy Otwell",
+];
+const Commendations = [
+  {
+    title: "After Dark Award for Outstanding Production",
+    author: "",
+    publication: "",
+  },
+  {
+    title: "Best of the Fringe in 2006",
+    author: "Kerry Reid",
+    publication: "Chicago Tribune",
+  },
+];
+
+const Prev = {
+  title: "Hamlet",
+  link: "/blake-montgomery/productions/hamlet",
+};
+const Next = {
+  title: "Moby-Dick (2006)",
+  link: "/blake-montgomery/productions/moby-2006",
+};
+
 export default async function Dustbowl() {
   const images = await getDustbowlImages();
 
   return (
-    <main className="flex flex-row items-start justify-center w-full h-[calc(100vh-6rem)] bg-gradient-to-b from-neutral-800 to-neutral-950 px-12 py-0 overflow-hidden text-neutral-300">
+    <main className="flex flex-row items-start justify-center w-full h-[calc(100vh-6rem)] bg-gradient-to-b from-neutral-800 to-neutral-950 px-12 py-0 overflow-hidden text-neutral-400">
       <div className="flex flex-row items-start justify-center w-full px-6 py-0 h-full">
-        <div className="flex flex-col items-start justify-start gap-2 w-1/2 p-8">
-          <Link href="/blake-montgomery/productions">
-            <p className="text-sm text-neutral-400 mb-8">
-              &larr; Back to Production History
-            </p>
-          </Link>
-          <h1 className="text-3xl font-semibold">Dustbowl Gothic</h1>
-          <p>Inspired by the painting by Grant Wood</p>
-          <p className="mt-2">Conceived and Directed by Blake Montgomery</p>
-          <p className="mt-2">
-            Created and performed by Lori Myers, Leah Urzendowski, Sarah Goeden,
-            Jeremy Sher, Alex Goodrich, and Chris Hibbard
-          </p>
-          <p className="mt-2">Original Music by Kevin O&apos;Donnell</p>
-          <p className="mt-2">
-            After Dark Award for Outstanding Production, 2006
-          </p>
-          <Link href="/blake-montgomery/productions/hamlet">
-            <p className="text-sm text-neutral-400 mb-8">&larr; Hamlet</p>
-          </Link>
-          <Link href="/blake-montgomery/productions/moby-2006">
-            <p className="text-sm text-neutral-400 mb-8">
-              Moby-Dick (2006) &rarr;
-            </p>
-          </Link>
-        </div>
+        <ProductionInfo
+          title={Title}
+          credits={Credits}
+          secondCredits={SecondCredits}
+          commendations={Commendations}
+          prev={Prev}
+          next={Next}
+        />
         <div className="w-1/2 h-full overflow-y-scroll flex flex-col items-center justify-start gap-4 bg-gradient-to-b  from-neutral-300/10 to-neutral-600/10 px-8 pt-8 pb-16">
           {images.length === 0 ? (
             <p className="mt-8 text-sm text-neutral-400">
