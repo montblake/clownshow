@@ -37,7 +37,13 @@ const SecondCredits = [
   "Lighting Design by Lee Keenan",
   "Scenic Design by Blake Montgomery",
 ];
-const Commendations = [""];
+const Commendations = [
+  {
+    title: "",
+    author: "",
+    publication: "",
+  },
+];
 const Prev = {
   title: "Franklin Expedition",
   link: "/blake-montgomery/productions/franklin",
@@ -68,6 +74,9 @@ export default async function Hansel() {
             </p>
           ) : (
             <div className="flex flex-col items-center justify-center gap-8">
+              <p className="mt-0 text-sm text-neutral-400">
+                Photos by Michael Brosilow
+              </p>
               {images.map((image) => (
                 <Image
                   key={image.src}
