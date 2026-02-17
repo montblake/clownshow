@@ -1,5 +1,24 @@
 import Link from "next/link";
 
+interface ProductionInfoProps {
+  title: string;
+  credits: string[];
+  secondCredits: string[];
+  commendations: {
+    title: string;
+    author: string;
+    publication: string;
+  }[];
+  prev: {
+    title: string;
+    link: string;
+  };
+  next: {
+    title: string;
+    link: string;
+  };
+}
+
 export default function ProductionInfo({
   title,
   credits,
