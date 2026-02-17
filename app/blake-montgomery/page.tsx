@@ -13,7 +13,7 @@ export default function BlakeMontgomery() {
           className="w-1/3 h-full object-cover border border-neutral-600"
         />
         <div className="flex flex-col items-start justify-between w-2/3 text-base/5 xl:text-xl text-neutral-300 h-full flex-1 overflow-y-auto">
-          <div className="flex flex-col items-start justify-start w-full gap-4 text-base/5 xl:text-xl text-neutral-300 h-full">
+          <div className="flex flex-col items-start justify-start w-full gap-4 text-sm/5 xl:text-xl text-neutral-300 h-full">
             <p className="w-full text-justify">
               <span className="font-bold uppercase">Blake Montgomery</span> is a
               Chicago-based theater artist whose career spans acting and
@@ -55,12 +55,14 @@ export default function BlakeMontgomery() {
           </div>
           <div className="flex flex-row items-center justify-start gap-4">
             <Link href="/blake-montgomery/productions">
-              <p className="text-sm text-neutral-400">
+              <p className="text-sm text-neutral-400 border px-4 py-2 rounded-md border-neutral-400 hover:bg-neutral-400 hover:text-neutral-800 transition-all duration-300 active:underline">
                 &rarr; View Production History
               </p>
             </Link>
             <Link href="/blake-montgomery/contact">
-              <p className="text-sm text-neutral-400">&rarr; Get in Touch</p>
+              <p className="text-sm text-neutral-400 border px-4 py-2 rounded-md border-neutral-400 hover:bg-neutral-400 hover:text-neutral-800 transition-all duration-300 active:underline">
+                &rarr; Get in Touch
+              </p>
             </Link>
           </div>
         </div>

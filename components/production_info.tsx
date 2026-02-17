@@ -28,10 +28,10 @@ export default function ProductionInfo({
   next,
 }: ProductionInfoProps) {
   return (
-    <div className="flex flex-col items-start justify-between gap-2 w-1/2 h-full p-8">
+    <div className="flex flex-col items-start justify-between gap-2 w-1/2 h-full py-8 pr-8">
       <div className="flex flex-col items-start justify-start gap-4 h-full overflow-y-scroll pb-8">
         <Link href="/blake-montgomery/productions">
-          <p className="text-sm text-neutral-400 mb-8 border px-4 py-2 rounded-md border-neutral-400">
+          <p className="text-sm text-neutral-400 border px-4 py-2 rounded-md border-neutral-400 hover:bg-neutral-400 hover:text-neutral-800 transition-all duration-300 active:underline mb-4">
             &larr; Back to Production History
           </p>
         </Link>
@@ -69,12 +69,12 @@ export default function ProductionInfo({
       </div>
       <div className="flex flex-row items-start justify-start gap-4">
         <Link href={prev.link}>
-          <p className="text-sm text-neutral-400 mb-8 border px-4 py-2 rounded-md border-neutral-400">
+          <p className="text-sm text-neutral-400 border px-4 py-2 rounded-md border-neutral-400 hover:bg-neutral-400 hover:text-neutral-800 transition-all duration-300 active:underline">
             &larr; {prev.title}
           </p>
         </Link>
         <Link href={next.link}>
-          <p className="text-sm text-neutral-400 mb-8 border px-4 py-2 rounded-md border-neutral-400">
+          <p className="text-sm text-neutral-400 border px-4 py-2 rounded-md border-neutral-400 hover:bg-neutral-400 hover:text-neutral-800 transition-all duration-300 active:underline">
             {next.title} &rarr;
           </p>
         </Link>
