@@ -37,7 +37,7 @@ const SecondCredits = [
   "Lighting Design by Lee Keenan",
   "Scenic Design by Blake Montgomery",
 ];
-const Commendations = [];
+const Commendations = [""];
 const Prev = {
   title: "Franklin Expedition",
   link: "/blake-montgomery/productions/franklin",
