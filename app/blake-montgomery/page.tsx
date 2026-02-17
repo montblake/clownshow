@@ -13,7 +13,7 @@ export default function BlakeMontgomery() {
           className="w-1/3 h-full object-cover border border-neutral-600"
         />
         <div className="flex flex-col items-start justify-between w-2/3 text-base/5 xl:text-xl text-neutral-300 h-full flex-1 overflow-y-auto">
-          <div className="flex flex-col items-start justify-start w-full gap-4 text-sm/5 xl:text-xl text-neutral-300 h-full">
+          <div className="flex flex-col items-start justify-start w-full gap-4 text-sm/5 xl:text-base/5 text-neutral-300 h-full">
             <p className="w-full text-justify">
               <span className="font-bold uppercase">Blake Montgomery</span> is a
               Chicago-based theater artist whose career spans acting and
